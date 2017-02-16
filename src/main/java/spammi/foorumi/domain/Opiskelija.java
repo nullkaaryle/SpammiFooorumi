@@ -1,4 +1,4 @@
-package tikape.runko.domain;
+package spammi.foorumi.domain;
 
 public class Opiskelija {
 

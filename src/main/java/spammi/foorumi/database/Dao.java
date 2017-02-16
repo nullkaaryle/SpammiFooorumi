@@ -1,4 +1,4 @@
-package tikape.runko.database;
+package spammi.foorumi.database;
 
 import java.sql.*;
 import java.util.*;

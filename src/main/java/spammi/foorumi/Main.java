@@ -1,11 +1,11 @@
-package tikape.runko;
+package spammi.foorumi;
 
 import java.util.HashMap;
 import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
-import tikape.runko.database.Database;
-import tikape.runko.database.OpiskelijaDao;
+import spammi.foorumi.database.Database;
+import spammi.foorumi.database.OpiskelijaDao;
 
 public class Main {
 
