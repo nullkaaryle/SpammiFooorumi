@@ -11,14 +11,14 @@ public class Viesti {
     private int id;
     private String nimimerkki;
     private Viestiketju viestiketju;
-    private Timestamp lahetysika;
+    private Timestamp lahetysaika;
     private String sisalto;
 
     public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Timestamp lahetysika, String sisalto) {
         this.id = id;
         this.nimimerkki = nimimerkki;
         this.viestiketju = viestiketju;
-        this.lahetysika = lahetysika;
+        this.lahetysaika = lahetysika;
         this.sisalto = sisalto;
     }
 
@@ -27,7 +27,7 @@ public class Viesti {
     }
 
     public Timestamp getLahetysika() {
-        return lahetysika;
+        return lahetysaika;
     }
 
     public String getNimimerkki() {
