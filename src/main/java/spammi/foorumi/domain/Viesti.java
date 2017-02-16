@@ -14,11 +14,11 @@ public class Viesti {
     private Timestamp lahetysaika;
     private String sisalto;
 
-    public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Timestamp lahetysika, String sisalto) {
+    public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Timestamp lahetysaika, String sisalto) {
         this.id = id;
         this.nimimerkki = nimimerkki;
         this.viestiketju = viestiketju;
-        this.lahetysaika = lahetysika;
+        this.lahetysaika = lahetysaika;
         this.sisalto = sisalto;
     }
 
@@ -26,7 +26,7 @@ public class Viesti {
         return id;
     }
 
-    public Timestamp getLahetysika() {
+    public Timestamp getLahetysaika() {
         return lahetysaika;
     }
 
@@ -41,6 +41,5 @@ public class Viesti {
     public Viestiketju getViestiketju() {
         return viestiketju;
     }
-    
     
 }

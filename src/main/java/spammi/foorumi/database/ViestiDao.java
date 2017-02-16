@@ -23,7 +23,7 @@ public class ViestiDao implements Dao <Viesti, Integer> {
 
     @Override
     public Viesti findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
@@ -36,10 +36,10 @@ public class ViestiDao implements Dao <Viesti, Integer> {
         
         while(rs.next()){
         viestit.add(new Viesti(rs.getInt("id"),
-                        rs.getString("nimimerkki"),
-                        (vkDao.findOne(rs.getInt("id"))),
-                        rs.getTimestamp("lahetysaika"),
-                        rs.getString("sisalto")));
+                    rs.getString("nimimerkki"),
+                    (vkDao.findOne(rs.getInt("id"))),
+                    rs.getTimestamp("lahetysaika"),
+                    rs.getString("sisalto")));
         }
         
         rs.close();

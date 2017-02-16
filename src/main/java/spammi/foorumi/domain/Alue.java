@@ -21,5 +21,11 @@ public class Alue {
     public String getOtsikko() {
         return otsikko;
     }
+
+    @Override
+    public String toString() {
+        return this.otsikko;
+    }
+    
     
 }
