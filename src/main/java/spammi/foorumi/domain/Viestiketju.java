@@ -27,4 +27,11 @@ public class Viestiketju {
     public Alue getAlue() {
         return alue;
     }
+
+    @Override
+    public String toString() {
+        return this.aihe;
+    }
+    
+    
 }

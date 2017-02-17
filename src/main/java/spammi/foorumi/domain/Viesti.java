@@ -41,5 +41,13 @@ public class Viesti {
     public Viestiketju getViestiketju() {
         return viestiketju;
     }
+
+    //tulostukseen myös lähetysaika
+    @Override
+    public String toString() {
+        return this.nimimerkki +" kirjoitti: \n" + this.sisalto;
+    }
+    
+    
     
 }

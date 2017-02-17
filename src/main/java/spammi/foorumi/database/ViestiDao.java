@@ -4,7 +4,6 @@ package spammi.foorumi.database;
 import java.sql.*;
 import java.util.*;
 import spammi.foorumi.domain.Viesti;
-import spammi.foorumi.domain.Viestiketju;
 
 /**
  *
@@ -13,11 +12,11 @@ import spammi.foorumi.domain.Viestiketju;
 public class ViestiDao implements Dao <Viesti, Integer> {
     
     private Database database;
-    private Dao <Viestiketju, Integer> vkDao;
+    private ViestiketjuDao vkDao;
 
-    public ViestiDao(Database database, Dao<Viestiketju, Integer> vkDao) {
+    public ViestiDao(Database database) {
         this.database = database;
-        this.vkDao = vkDao;
+        this.vkDao = new ViestiketjuDao(database);
     }
 
     @Override

@@ -12,11 +12,11 @@ import spammi.foorumi.domain.*;
 public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
     
     private Database database;
-    private Dao <Alue, Integer> alueDao;
+    private AlueDao alueDao;
 
-    public ViestiketjuDao(Database database, Dao<Alue, Integer> alueDao) {
+    public ViestiketjuDao(Database database) {
         this.database = database;
-        this.alueDao = alueDao;
+        this.alueDao = new AlueDao(database);
     }
 
     @Override
@@ -39,6 +39,26 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
         connection.close();
         
         return vk ;
+    }
+    
+    public List<Viestiketju> findByAlue (Alue alue) throws SQLException{
+        Connection connection = database.getConnection();
+        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE alue = ?");
+        
+        stmnt.setInt(1, alue.getId());
+        ResultSet rs = stmnt.executeQuery();
+        List<Viestiketju> ketjut = new ArrayList();
+        
+        while(rs.next()){
+            ketjut.add(new Viestiketju(rs.getInt("id"), rs.getString("aihe"), alueDao.findOne(rs.getInt("alue"))));
+        }
+        
+        rs.close();
+        stmnt.close();
+        connection.close();
+        
+        return ketjut;
+        
     }
 
     @Override

@@ -30,11 +30,13 @@ public class AlueDao implements Dao<Alue, Integer> {
             return null;
         }
         
+        Alue alue = new Alue(rs.getInt("id"), rs.getString("otsikko"));
+        
         rs.close();
         stmnt.close();
         connection.close();
         
-        return new Alue(rs.getInt("id"), rs.getString("otsikko"));
+        return alue;
     }
 
     @Override
