@@ -9,6 +9,6 @@ public interface Dao<T, K> {
 
     List<T> findAll() throws SQLException;
     
-    T create() (T t) throws SQLException;
+    T create(T t) throws SQLException;
     
 }

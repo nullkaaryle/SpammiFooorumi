@@ -2,9 +2,8 @@
 package spammi.foorumi.database;
 
 import java.sql.*;
-import java.util.List;
-import spammi.foorumi.domain.Alue;
-import spammi.foorumi.domain.Viestiketju;
+import java.util.*;
+import spammi.foorumi.domain.*;
 
 /**
  *
@@ -33,7 +32,7 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
             return null;
         }
         
-        Viestiketju vk = new Viestiketju(rs.getInt("id"), rs.getString("aihe"), alueDao.findOne(rs.getInt("id")));
+        Viestiketju vk = new Viestiketju(rs.getInt("id"), rs.getString("aihe"), alueDao.findOne(rs.getInt("alue")));
         
         rs.close();
         stmnt.close();
@@ -44,12 +43,38 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
 
     @Override
     public List<Viestiketju> findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection connection = database.getConnection();
+        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viestiketju");
+        
+        ResultSet rs = stmnt.executeQuery();
+        List<Viestiketju> ketjut = new ArrayList();
+        
+        while (rs.next()){
+            ketjut.add(new Viestiketju(rs.getInt("id"), rs.getString("aihe"), alueDao.findOne(rs.getInt("alue"))));
+        }
+        
+        rs.close();
+        stmnt.close();
+        connection.close();
+        
+        return ketjut;
     }
 
     @Override
-    public Viestiketju create(Viestiketju t) throws SQLException {
-        return null;
+    public Viestiketju create(Viestiketju vk) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viestiketju VALUES (?, ?)");
+        
+        stmnt.setInt(1, vk.getId());
+        stmnt.setString(2, vk.getAihe());
+        stmnt.setInt(3, vk.getAlue().getId());
+        
+        stmnt.execute();
+        
+        stmnt.close();
+        connection.close();
+        
+        return new Viestiketju(vk.getId(), vk.getAihe(), vk.getAlue());
     }
 
     
