@@ -57,7 +57,8 @@ public class AlueDao implements Dao<Alue, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
+    public Alue create(Alue t) throws SQLException {
+        return null;
     }
 
 }

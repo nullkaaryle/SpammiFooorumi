@@ -46,4 +46,27 @@ public class Database {
 
         return lista;
     }
+    
+//    public List<T> queryAndCollect(String query, Collector<T> col, Object... params) throws SQLException {
+//        Connection conn = getConnection();
+//        List<T> rows = new ArrayList<>();
+//        PreparedStatement stmt = conn.prepareStatement(query);
+    
+//        for (int i = 0; i < params.length; i++) {
+//            stmt.setObject(i + 1, params[i]);
+//        }
+//
+//        ResultSet rs = stmt.executeQuery();
+//
+//        while (rs.next()) {
+//
+//            rows.add(col.collect(rs));
+//        }
+//
+//        rs.close();
+//        stmt.close();
+//        conn.close();
+//
+//        return rows;
+    
 }

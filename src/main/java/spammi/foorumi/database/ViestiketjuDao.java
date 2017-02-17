@@ -48,7 +48,10 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
+    public Viestiketju create(Viestiketju t) throws SQLException {
+        return null;
     }
+
+    
     
 }

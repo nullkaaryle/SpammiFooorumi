@@ -50,7 +50,8 @@ public class ViestiDao implements Dao <Viesti, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
+    public Viesti create(Viesti t) throws SQLException {
+        return null;
     }
     
 }

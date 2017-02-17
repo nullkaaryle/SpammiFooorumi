@@ -68,8 +68,8 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
-        // ei toteutettu
+    public Opiskelija create(Opiskelija t) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
