@@ -2,6 +2,7 @@
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  *
@@ -19,6 +20,13 @@ public class Viesti {
         this.nimimerkki = nimimerkki;
         this.viestiketju = viestiketju;
         this.lahetysaika = lahetysaika;
+        this.sisalto = sisalto;
+        //asetaLahetysaika();
+    }
+
+    public Viesti(String nimimerkki, Viestiketju viestiketju, String sisalto) {
+        this.nimimerkki = nimimerkki;
+        this.viestiketju = viestiketju;
         this.sisalto = sisalto;
     }
 
@@ -41,11 +49,16 @@ public class Viesti {
     public Viestiketju getViestiketju() {
         return viestiketju;
     }
+    
+//    public void asetaLahetysaika(){
+//        Calendar calendar = Calendar.getInstance();
+//        this.lahetysaika = new java.sql.Timestamp(calendar.getTime().getTime());
+//    }
 
     //tulostukseen myös lähetysaika
     @Override
     public String toString() {
-        return this.nimimerkki +" kirjoitti: \n" + this.sisalto;
+        return this.nimimerkki +" kirjoitti: \n" + this.sisalto +"\n"+ this.lahetysaika;
     }
     
     

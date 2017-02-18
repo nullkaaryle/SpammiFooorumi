@@ -61,16 +61,20 @@ public class AlueDao implements Dao<Alue, Integer> {
     @Override
     public Alue create(Alue t) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Alue VALUES (?, ?)");
+        PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Alue (otsikko) VALUES (?)");
         
-        stmnt. setInt(1, t.getId());
-        stmnt. setString(2, t.getOtsikko());
+        //stmnt. setInt(1, t.getId());
+        stmnt.setString(1, t.getOtsikko());
         stmnt.execute();
         
-        connection.close();
-        stmnt.close();
         
-        return new Alue(t.getId(), t.getOtsikko()); 
+        
+//        Alue alue = new Alue()
+//        
+//        connection.close();
+//        stmnt.close();
+        
+        return new Alue(t.getOtsikko()); 
     }
 
 }

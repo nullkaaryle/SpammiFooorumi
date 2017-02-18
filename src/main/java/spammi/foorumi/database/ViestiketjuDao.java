@@ -83,18 +83,17 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
     @Override
     public Viestiketju create(Viestiketju vk) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viestiketju VALUES (?, ?)");
+        PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viestiketju (aihe, alue) VALUES (?, ?)");
         
-        stmnt.setInt(1, vk.getId());
-        stmnt.setString(2, vk.getAihe());
-        stmnt.setInt(3, vk.getAlue().getId());
+        stmnt.setString(1, vk.getAihe());
+        stmnt.setInt(2, vk.getAlue().getId());
         
         stmnt.execute();
         
         stmnt.close();
         connection.close();
         
-        return new Viestiketju(vk.getId(), vk.getAihe(), vk.getAlue());
+        return new Viestiketju(vk.getAihe(), vk.getAlue());
     }
 
     

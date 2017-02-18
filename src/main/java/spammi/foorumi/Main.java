@@ -20,6 +20,8 @@ public class Main {
         kayttis.naytaViestiketjut();
         System.out.println("");
         kayttis.viestiketjutAlueittain();
+        System.out.println("");
+        kayttis.lisaaAlueViestiketjuJaViesti();
         //kayttis.naytaViestit();
         
 

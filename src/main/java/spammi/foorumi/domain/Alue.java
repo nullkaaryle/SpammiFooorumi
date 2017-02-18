@@ -14,6 +14,12 @@ public class Alue {
         this.otsikko = otsikko;
     }
 
+    public Alue(String otsikko) {
+        this.otsikko = otsikko;
+    }
+    
+    
+
     public int getId() {
         return id;
     }
