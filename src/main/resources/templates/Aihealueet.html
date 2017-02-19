@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>SpammiFoorumi</title>
+        
+    </head>
+    <body>
+        <h1>SpammiFoorumi</h1>
+        
+        <table>
+            <tr>
+                <th>Alue</th>
+                <th>Viesteja yhteensa</th>
+                <th>Viimeisin viesti</th>
+            </tr>
+            
+            <tr th:each="alue: ${alueet}">
+                <td th:text="${alue.otsikko}"></td>
+                
+                <td th:each="maara:${alue.id}">
+                    <span th:text="${maara}"></span>
+                </td>
+                
+                
+                
+            </tr>
+            
+            
+            
+            
+        </table>
+    </body>
+</html>
