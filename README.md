@@ -4,6 +4,6 @@
 
 Ryhmämme
 
-* [BikkuMyy](https://github.com/BikkuMyy)|
-* [Geffe](https://github.com/Geffe) |
-* [nullkaaryle](https://github.com/nullkaaryle)|
+* [BikkuMyy](https://github.com/BikkuMyy)
+* [Geffe](https://github.com/Geffe)
+* [nullkaaryle](https://github.com/nullkaaryle)
