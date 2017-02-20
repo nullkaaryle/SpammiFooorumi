@@ -12,6 +12,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
     private Database database;
     private ViestiketjuDao vkDao;
+   
 
     public ViestiDao(Database database) {
         this.database = database;

@@ -76,5 +76,15 @@ public class AlueDao implements Dao<Alue, Integer> {
         
         return new Alue(t.getOtsikko()); 
     }
+    
+    public int newId() throws SQLException{ //voi olla helpompikin tapa luoda uusi id, mutta en tähän hätään keksinyt
+        int suurinId =0;
+        for(Alue alue: findAll()){
+            if(alue.getId()>suurinId){
+                suurinId=alue.getId();
+            }
+        }
+        return suurinId+1;
+    }
 
 }
