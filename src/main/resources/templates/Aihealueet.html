@@ -6,6 +6,7 @@
         
     </head>
     <body>
+        
         <h1>SpammiFoorumi</h1>
         
         <table>
@@ -16,7 +17,9 @@
             </tr>
             
             <tr th:each="alue: ${alueet}">
-                <td th:text="${alue.otsikko}"></td>
+                <td>   
+                    <a th:href="@{~/alue/{id}(id=${alue.id})}" th:text="${alue.otsikko}"></a>
+                </td>
                 
                 <td th:each="maara:${alue.id}">
                     <span th:text="${maara}"></span>
@@ -26,9 +29,14 @@
                 
             </tr>
             
-            
-            
-            
+             
         </table>
+        
+        <h2>Lisää uusi alue</h2>
+        <form method="POST" th:action="@{~/alue}">
+            
+            <input type="text" name="alue"/>
+            <input type="submit" value="Lisaa"/>
+        </form>
     </body>
 </html>

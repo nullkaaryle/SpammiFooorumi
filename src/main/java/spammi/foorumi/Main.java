@@ -13,6 +13,7 @@ import spammi.foorumi.database.OpiskelijaDao;
 import spammi.foorumi.database.ViestiDao;
 import spammi.foorumi.database.ViestiketjuDao;
 import spammi.foorumi.domain.Alue;
+import spammi.foorumi.domain.Viesti;
 import spammi.foorumi.domain.Viestiketju;
 
 public class Main {
@@ -20,6 +21,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Database database = new Database("jdbc:sqlite:spammitestidata.db"); 
         //database.init();
+        
         
 //        TestiKayttis kayttis = new TestiKayttis(database);
 //        
@@ -31,6 +33,7 @@ public class Main {
 //        System.out.println("");
 //        kayttis.lisaaAlueViestiketjuJaViesti();
 //        kayttis.naytaViestit();
+//        
         
         
 
@@ -60,13 +63,15 @@ public class Main {
         AlueDao alueDao = new AlueDao(database);
         ViestiDao viestiDao = new ViestiDao(database);
         ViestiketjuDao viestiketjuDao = new ViestiketjuDao(database);
+        
+        
 
-        get("/",(req,res)->{
+        get("/",(req,res)->{  //puuttuu vielä viestien ajat ja viestien määrä ei toimi toivotusti
             HashMap<String,Object> data = new HashMap();
             data.put("alueet",alueDao.findAll());
             
             for (Alue alue : alueDao.findAll()){
-                Integer maara = 0;
+                int maara = 0;
                 
                 for (Viestiketju viestiketju: viestiketjuDao.findByAlue(alue)){
                     maara += viestiDao.countViestit(viestiketju);
@@ -76,6 +81,31 @@ public class Main {
             }
             
             return new ModelAndView(data,"Aihealueet");
+        },new ThymeleafTemplateEngine());
+        
+        
+        post("/alue",(req,res) ->{
+            if(!req.queryParams("alue").isEmpty()){
+                
+                Alue alue = new Alue(alueDao.newId(),req.queryParams("alue"));
+                alueDao.create(alue);
+            }
+            res.redirect("/");
+            return "";
+        });
+        
+        get("/alue/:id",(req,res)->{                       //ei toimi vielä kunnolla
+            int id = Integer.parseInt(req.params(":id"));
+            HashMap<String,Object> data = new HashMap();
+            List<Viestiketju> ketjut = new ArrayList();
+            
+            for(Viestiketju viestiketju : viestiketjuDao.findAll()){
+                if(viestiketju.getAlue().getId()== id){
+                    ketjut.add(viestiketju);
+                }
+            }
+            data.put("ketjut",ketjut);
+            return new ModelAndView(data,"viestiketjut");
         },new ThymeleafTemplateEngine());
     }
 }
