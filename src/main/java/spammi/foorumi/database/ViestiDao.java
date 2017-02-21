@@ -1,7 +1,11 @@
 package spammi.foorumi.database;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import spammi.foorumi.domain.*;
 
 /**
@@ -31,13 +35,18 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
         ResultSet rs = stmnt.executeQuery();
         List<Viesti> viestit = new ArrayList();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         while (rs.next()) {
-            viestit.add(new Viesti(rs.getInt("id"),
-                    rs.getString("nimimerkki"),
-                    (vkDao.findOne(rs.getInt("viestiketju"))),
-                    rs.getTimestamp("lahetysaika"),
-                    rs.getString("sisalto")));
+            try {
+                viestit.add(new Viesti(rs.getInt("id"),
+                        rs.getString("nimimerkki"),
+                        (vkDao.findOne(rs.getInt("viestiketju"))),
+                        formatter.parse(rs.getString("lahetysaika")),
+                        rs.getString("sisalto")));
+            } catch (ParseException ex) {
+                Logger.getLogger(ViestiDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         rs.close();

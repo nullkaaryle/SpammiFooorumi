@@ -3,6 +3,7 @@ package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -12,16 +13,15 @@ public class Viesti {
     private int id;
     private String nimimerkki;
     private Viestiketju viestiketju;
-    private Timestamp lahetysaika;
+    private Date lahetysaika;
     private String sisalto;
 
-    public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Timestamp lahetysaika, String sisalto) {
+    public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Date lahetysaika, String sisalto) {
         this.id = id;
         this.nimimerkki = nimimerkki;
         this.viestiketju = viestiketju;
         this.lahetysaika = lahetysaika;
         this.sisalto = sisalto;
-        //asetaLahetysaika();
     }
 
     public Viesti(String nimimerkki, Viestiketju viestiketju, String sisalto) {
@@ -34,7 +34,7 @@ public class Viesti {
         return id;
     }
 
-    public Timestamp getLahetysaika() {
+    public Date getLahetysaika() {
         return lahetysaika;
     }
 
@@ -50,10 +50,6 @@ public class Viesti {
         return viestiketju;
     }
     
-//    public void asetaLahetysaika(){
-//        Calendar calendar = Calendar.getInstance();
-//        this.lahetysaika = new java.sql.Timestamp(calendar.getTime().getTime());
-//    }
 
     //tulostukseen myös lähetysaika
     @Override
