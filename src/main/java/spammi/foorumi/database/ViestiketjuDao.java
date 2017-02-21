@@ -50,7 +50,9 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
         List<Viestiketju> ketjut = new ArrayList();
         
         while(rs.next()){
-            ketjut.add(new Viestiketju(rs.getInt("id"), rs.getString("aihe"), alueDao.findOne(rs.getInt("alue"))));
+            ketjut.add(new Viestiketju(rs.getInt("id"),
+                        rs.getString("aihe"), 
+                        alueDao.findOne(rs.getInt("alue"))));
         }
         
         rs.close();

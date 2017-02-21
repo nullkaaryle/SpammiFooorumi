@@ -32,14 +32,11 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         ResultSet rs = stmnt.executeQuery();
         List<Viesti> viestit = new ArrayList();
 
-        Timestamp ts = rs.getTimestamp("lahetysaika");
-        //Instant instant = ts.toInstant();
-
         while (rs.next()) {
             viestit.add(new Viesti(rs.getInt("id"),
                     rs.getString("nimimerkki"),
                     (vkDao.findOne(rs.getInt("viestiketju"))),
-                    ts,
+                    rs.getTimestamp("lahetysaika"),
                     rs.getString("sisalto")));
         }
 
@@ -47,6 +44,24 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         stmnt.close();
         connection.close();
 
+        return viestit;
+    }
+    
+    public List<Viesti> findByViestiketju(Viestiketju ketju) throws SQLException{
+        Connection connection = database.getConnection();
+        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viesti WHERE Viestiketju = ?");
+        
+        stmnt.setInt(1, ketju.getId());
+        ResultSet rs = stmnt.executeQuery();
+        List<Viesti> viestit = new ArrayList();
+        
+        while(rs.next()){
+            viestit.add(new Viesti(rs.getInt("id"),
+                        rs.getString("nimimerkki"),
+                        vkDao.findOne(rs.getInt("viestiketju")),
+                        rs.getTimestamp("lahetysaika"),
+                        rs.getString("sisalto")));
+        }
         return viestit;
     }
 
