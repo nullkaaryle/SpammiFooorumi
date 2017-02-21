@@ -1,4 +1,9 @@
 # Spammifoorumi
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+##Tietokantojen perusteet -kurssin ryhmätyö (kevät 2017, periodi 3)##
 
+Ryhmämme
+
+* [BikkuMyy](https://github.com/BikkuMyy)
+* [Geffe](https://github.com/Geffe)
+* [nullkaaryle](https://github.com/nullkaaryle)
