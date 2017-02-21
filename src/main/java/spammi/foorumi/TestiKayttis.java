@@ -25,6 +25,21 @@ public class TestiKayttis {
         this.lukija = new Scanner(System.in);
     }
     
+    public void testaa() throws SQLException{
+                
+        naytaAlueet();
+        System.out.println("");
+        naytaViestiketjut();
+        System.out.println("");
+        viestiketjutAlueittain();
+//        System.out.println("");
+//        lisaaAlueViestiketjuJaViesti();
+        System.out.println("");
+        naytaViestit();
+
+        
+    }
+    
     //tulostaa kaikki alueet
     public void naytaAlueet() throws SQLException {
         for (Alue alue : alueDao.findAll()) {

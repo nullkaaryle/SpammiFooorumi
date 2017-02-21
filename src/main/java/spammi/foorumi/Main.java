@@ -23,17 +23,8 @@ public class Main {
         //database.init();
         
         
-//        TestiKayttis kayttis = new TestiKayttis(database);
-//        
-//        kayttis.naytaAlueet();
-//        System.out.println("");
-//        kayttis.naytaViestiketjut();
-//        System.out.println("");
-//        kayttis.viestiketjutAlueittain();
-//        System.out.println("");
-//        kayttis.lisaaAlueViestiketjuJaViesti();
-//        kayttis.naytaViestit();
-//        
+        TestiKayttis kayttis = new TestiKayttis(database);
+        kayttis.testaa();
         
         
 
