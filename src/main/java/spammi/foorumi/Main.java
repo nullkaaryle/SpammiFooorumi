@@ -1,20 +1,12 @@
 package spammi.foorumi;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import spammi.foorumi.database.AlueDao;
+import java.util.*;
 import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
-import spammi.foorumi.database.Database;
-import spammi.foorumi.database.OpiskelijaDao;
-import spammi.foorumi.database.ViestiDao;
-import spammi.foorumi.database.ViestiketjuDao;
-import spammi.foorumi.domain.Alue;
-import spammi.foorumi.domain.Viesti;
-import spammi.foorumi.domain.Viestiketju;
+import spammi.foorumi.database.*;
+import spammi.foorumi.domain.*;
 
 public class Main {
 
@@ -54,8 +46,6 @@ public class Main {
         AlueDao alueDao = new AlueDao(database);
         ViestiDao viestiDao = new ViestiDao(database);
         ViestiketjuDao viestiketjuDao = new ViestiketjuDao(database);
-        
-        
 
         get("/",(req,res)->{  //puuttuu vielä viestien ajat ja viestien määrä ei toimi toivotusti
             HashMap<String,Object> data = new HashMap();

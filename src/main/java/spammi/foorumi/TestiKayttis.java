@@ -27,11 +27,11 @@ public class TestiKayttis {
     
     public void testaa() throws SQLException{
                 
-        naytaAlueet();
-        System.out.println("");
-        naytaViestiketjut();
-        System.out.println("");
-        viestiketjutAlueittain();
+//        naytaAlueet();
+//        System.out.println("");
+//        naytaViestiketjut();
+//        System.out.println("");
+//        viestiketjutAlueittain();
 //        System.out.println("");
 //        lisaaAlueViestiketjuJaViesti();
         System.out.println("");

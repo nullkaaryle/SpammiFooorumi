@@ -1,8 +1,8 @@
 package spammi.foorumi.database;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import org.sqlite.SQLiteConfig;
 
 public class Database {
 
@@ -13,7 +13,10 @@ public class Database {
     }
 
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(databaseAddress);
+        SQLiteConfig sqLiteConfig = new SQLiteConfig();
+        Properties properties = sqLiteConfig.toProperties();
+        properties.setProperty(SQLiteConfig.Pragma.DATE_STRING_FORMAT.pragmaName, "yyyy-MM-dd HH:mm:ss");
+        return DriverManager.getConnection(databaseAddress, properties);
     }
 
     public void init() {

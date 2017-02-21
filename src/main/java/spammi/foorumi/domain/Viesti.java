@@ -2,6 +2,7 @@
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,9 +51,6 @@ public class Viesti {
         return viestiketju;
     }
     
-
-    //tulostukseen myös lähetysaika
-    @Override
     public String toString() {
         return this.nimimerkki +" kirjoitti: \n" + this.sisalto +"\n"+ this.lahetysaika;
     }
