@@ -34,7 +34,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
         ResultSet rs = stmnt.executeQuery();
         List<Viesti> viestit = new ArrayList();
-<<<<<<< HEAD
+
 
         while (rs.next()) {
             viestit.add(new Viesti(rs.getInt("id"),
@@ -42,8 +42,9 @@ public class ViestiDao implements Dao<Viesti, Integer> {
                     (vkDao.findOne(rs.getInt("viestiketju"))),
                     rs.getTimestamp("lahetysaika"),
                     rs.getString("sisalto")));
-=======
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
 
         while (rs.next()) {
             try {
@@ -55,7 +56,8 @@ public class ViestiDao implements Dao<Viesti, Integer> {
             } catch (ParseException ex) {
                 Logger.getLogger(ViestiDao.class.getName()).log(Level.SEVERE, null, ex);
             }
->>>>>>> b2a987cd35a6c74cb6bcaefda6ae51db1569755e
+
+        }
         }
 
         rs.close();
