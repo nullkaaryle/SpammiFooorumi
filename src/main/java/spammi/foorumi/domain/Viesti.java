@@ -2,9 +2,7 @@
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.Calendar;
-import java.util.Date;
+
 
 /**
  *
@@ -17,11 +15,9 @@ public class Viesti {
 
     private Timestamp lahetysaika;
 
-//    private Date lahetysaika;
-
     private String sisalto;
 
-    public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Date lahetysaika, String sisalto) {
+    public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Timestamp lahetysaika, String sisalto) {
         this.id = id;
         this.nimimerkki = nimimerkki;
         this.viestiketju = viestiketju;
@@ -40,10 +36,8 @@ public class Viesti {
     }
 
 
-//    public Timestamp getLahetysaika() {
-//    }
+    public Timestamp getLahetysaika() {
 
-    public Date getLahetysaika() {
 
         return lahetysaika;
     }
