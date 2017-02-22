@@ -50,6 +50,7 @@ public class Main {
         get("/",(req,res)->{  //puuttuu vielä viestien ajat ja viestien määrä ei toimi toivotusti
             HashMap<String,Object> data = new HashMap();
             data.put("alueet",alueDao.findAll());
+            HashMap<String,Integer> maarat = new HashMap();
             
             for (Alue alue : alueDao.findAll()){
                 int maara = 0;
@@ -57,11 +58,11 @@ public class Main {
                 for (Viestiketju viestiketju: viestiketjuDao.findByAlue(alue)){
                     maara += viestiDao.countViestit(viestiketju);
                 }
-                
-                data.put(""+alue.getId(),""+maara);
+                maarat.put(alue.getId()+"",maara);
             }
             
-            return new ModelAndView(data,"Aihealueet");
+            data.put("maarat",maarat);
+            return new ModelAndView(data,"aihealueet");
         },new ThymeleafTemplateEngine());
         
         
@@ -78,15 +79,11 @@ public class Main {
         get("/alue/:id",(req,res)->{                       //ei toimi vielä kunnolla
             int id = Integer.parseInt(req.params(":id"));
             HashMap<String,Object> data = new HashMap();
-            List<Viestiketju> ketjut = new ArrayList();
             
-            for(Viestiketju viestiketju : viestiketjuDao.findAll()){
-                if(viestiketju.getAlue().getId()== id){
-                    ketjut.add(viestiketju);
-                }
-            }
-            data.put("ketjut",ketjut);
+            data.put("ketjut",viestiketjuDao.findByAlue(alueDao.findOne(id)));
             return new ModelAndView(data,"viestiketjut");
         },new ThymeleafTemplateEngine());
+        
+        
     }
 }

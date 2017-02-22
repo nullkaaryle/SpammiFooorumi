@@ -12,7 +12,7 @@
         <table>
             <tr>
                 <th>Alue</th>
-                <th>Viesteja yhteensa</th>
+                <th>Viestejä yhteensä</th>
                 <th>Viimeisin viesti</th>
             </tr>
             
@@ -21,13 +21,15 @@
                     <a th:href="@{~/alue/{id}(id=${alue.id})}" th:text="${alue.otsikko}"></a>
                 </td>
                 
-                <td th:each="maara:${alue.id}">
-                    <span th:text="${maara}"></span>
-                </td>
+            <td th:each="maara:${maarat}">
+
+                <span th:text="${maara}"></span>
+            </td>
                 
                 
                 
             </tr>
+            
             
              
         </table>
@@ -36,7 +38,10 @@
         <form method="POST" th:action="@{~/alue}">
             
             <input type="text" name="alue"/>
-            <input type="submit" value="Lisaa"/>
+            <input type="submit" value="Lisää"/>
         </form>
+        
+        <a th:href="@{~/}">Takaisin etusivulle</a>
+       
     </body>
 </html>

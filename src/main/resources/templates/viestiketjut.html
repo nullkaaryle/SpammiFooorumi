@@ -10,16 +10,33 @@
         <h1>SpammiFoorumi</h1>
         
         <table>
-            <tr>
-                <th>Alue</th>
-                <th>Viesteja</th>
-                <th>Viimeisin viesti</th>
+            <tr th:each="ketju: ${ketjut}">
+                <td>   
+                    <a th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.aihe}"></a>
+                </td>
+                
+            <td th:each="maara:${maarat}">
+
+                <span th:text="${maara}"></span>
+            </td>
+                
+                
+                
             </tr>
             
             
             
              
         </table>
+        
+        <h2>Lisää uusi viestiketju, ei toimi, yritäppä vaa!</h2> 
+        <form method="POST" th:action="@{~/alue/:id}">
+            
+            <input type="text" name="viestiketju"/>
+            <input type="submit" value="Lisää"/>
+        </form>
+        
+        <a th:href="@{~/}">Takaisin etusivulle</a>
         
         
         
