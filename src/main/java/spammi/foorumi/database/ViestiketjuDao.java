@@ -83,7 +83,7 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
     }
 
     @Override
-    public Viestiketju create(Viestiketju vk) throws SQLException {
+    public void create(Viestiketju vk) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viestiketju (aihe, alue) VALUES (?, ?)");
         
@@ -97,8 +97,6 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
         
         stmnt.close();
         connection.close();
-        
-        return new Viestiketju(vk.getAihe(), vk.getAlue());
     }
 
     

@@ -15,9 +15,6 @@ public class Main {
         
         Spammifoorumi foorumi = new Spammifoorumi(database);
         foorumi.kaynnista();
-        
-        
-
 
         
     }

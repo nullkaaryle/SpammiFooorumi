@@ -21,7 +21,7 @@ public class Viesti {
         this.id = id;
         this.nimimerkki = nimimerkki;
         this.viestiketju = viestiketju;
-//        this.lahetysaika = lahetysaika;
+        this.lahetysaika = lahetysaika;
         this.sisalto = sisalto;
     }
 

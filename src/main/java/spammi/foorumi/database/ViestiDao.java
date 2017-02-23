@@ -68,7 +68,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     }
 
     @Override
-    public Viesti create(Viesti v) throws SQLException {
+    public void create(Viesti v) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viesti (nimimerkki, viestiketju, lahetysaika, sisalto) VALUES (?, ?, DATETIME('now', 'localtime'), ?)");
         
@@ -81,8 +81,6 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
         stmnt.execute();
         connection.close();
-
-        return v;
     }
 
     public int countViestit(Viestiketju viestiketju) throws SQLException {
