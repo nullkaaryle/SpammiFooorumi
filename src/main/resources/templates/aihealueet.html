@@ -21,9 +21,9 @@
                     <a th:href="@{~/alue/{id}(id=${alue.id})}" th:text="${alue.otsikko}"></a>
                 </td>
                 
-            <td th:each="maara:${maarat}">
+            <td>
 
-                <span th:text="${maara}"></span>
+                <span th:text="${alue.vkMaara}"></span>
             </td>
                 
                 

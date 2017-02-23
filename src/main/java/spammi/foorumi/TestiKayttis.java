@@ -98,41 +98,41 @@ public class TestiKayttis {
         }
     }
 
-    public void lisaaAlueViestiketjuJaViesti() throws SQLException {
-        luoAlue();
-        luoViestiketju();
-        luoViesti();
-    }
+//    public void lisaaAlueViestiketjuJaViesti() throws SQLException {
+//        luoAlue();
+//        luoViestiketju();
+//        luoViesti();
+//    }
 
-    //lisää alueen
-    public void luoAlue() throws SQLException {
-        System.out.print("Alueen otsikko: ");
-        String otsikko = lukija.nextLine();
-
-        Alue alue = alueDao.create(new Alue(otsikko));
-        System.out.println(alue.toString());
-    }
-
-    //lisää viestiketju
-    public void luoViestiketju() throws SQLException {
-        Alue alue = alueDao.findOne(1);
-        System.out.print("Viestiketjun aihe: ");
-        String aihe = lukija.nextLine();
-
-        Viestiketju vk = vkDao.create(new Viestiketju(aihe, alue));
-        System.out.println(vk.toString());
-    }
-
-    //lisää viesti
-    public void luoViesti() throws SQLException {
-        Viestiketju vk = vkDao.findOne(1);
-        System.out.print("Nimimerkki");
-        String nimimerkki = lukija.nextLine();
-        System.out.print("Viesti: ");
-        String sisalto = lukija.nextLine();
-
-        Viesti viesti = viestiDao.create(new Viesti(nimimerkki, vk, sisalto));
-        System.out.println(viesti.toString());
-    }
+//    //lisää alueen
+//    public void luoAlue() throws SQLException {
+//        System.out.print("Alueen otsikko: ");
+//        String otsikko = lukija.nextLine();
+//
+//        Alue alue = alueDao.create(new Alue(otsikko));
+//        System.out.println(alue.toString());
+//    }
+//
+//    //lisää viestiketju
+//    public void luoViestiketju() throws SQLException {
+//        Alue alue = alueDao.findOne(1);
+//        System.out.print("Viestiketjun aihe: ");
+//        String aihe = lukija.nextLine();
+//
+//        Viestiketju vk = vkDao.create(new Viestiketju(aihe, alue));
+//        System.out.println(vk.toString());
+//    }
+//
+//    //lisää viesti
+//    public void luoViesti() throws SQLException {
+//        Viestiketju vk = vkDao.findOne(1);
+//        System.out.print("Nimimerkki");
+//        String nimimerkki = lukija.nextLine();
+//        System.out.print("Viesti: ");
+//        String sisalto = lukija.nextLine();
+//
+//        Viesti viesti = viestiDao.create(new Viesti(nimimerkki, vk, sisalto));
+//        System.out.println(viesti.toString());
+//    }
 
 }
