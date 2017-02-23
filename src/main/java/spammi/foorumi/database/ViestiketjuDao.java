@@ -87,8 +87,11 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viestiketju (aihe, alue) VALUES (?, ?)");
         
+        Alue alue = vk.getAlue();
+        alue.lisaaViestiketjujenMaaraa();
+        
         stmnt.setString(1, vk.getAihe());
-        stmnt.setInt(2, vk.getAlue().getId());
+        stmnt.setInt(2, alue.getId());
         
         stmnt.execute();
         

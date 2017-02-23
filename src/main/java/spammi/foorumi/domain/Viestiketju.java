@@ -9,19 +9,19 @@ public class Viestiketju {
     private int id;
     private String aihe;
     private Alue alue;
+    private int vMaara;
 
     public Viestiketju(int id, String aihe, Alue alue) {
         this.id = id;
         this.aihe = aihe;
         this.alue = alue;
+        this.vMaara = 0;
     }
 
     public Viestiketju(String aihe, Alue alue) {
         this.aihe = aihe;
         this.alue = alue;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -39,6 +39,13 @@ public class Viestiketju {
     public String toString() {
         return this.aihe;
     }
+
+    public int getvMaara() {
+        return vMaara;
+    }
     
+    public void lisaaViestienMaaraa(){
+        this.vMaara++;
+    }
     
 }

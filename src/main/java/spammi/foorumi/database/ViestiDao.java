@@ -71,15 +71,18 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     public Viesti create(Viesti v) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viesti (nimimerkki, viestiketju, lahetysaika, sisalto) VALUES (?, ?, DATETIME('now', 'localtime'), ?)");
-
+        
+        Viestiketju ketju =v.getViestiketju();
+        ketju.lisaaViestienMaaraa();
+        
         stmnt.setString(1, v.getNimimerkki());
-        stmnt.setInt(2, v.getViestiketju().getId());
+        stmnt.setInt(2, ketju.getId());
         stmnt.setString(3, v.getSisalto());
 
         stmnt.execute();
         connection.close();
 
-        return new Viesti(v.getNimimerkki(), v.getViestiketju(), v.getSisalto());
+        return v;
     }
 
     public int countViestit(Viestiketju viestiketju) throws SQLException {

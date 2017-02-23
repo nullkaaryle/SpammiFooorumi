@@ -63,28 +63,13 @@ public class AlueDao implements Dao<Alue, Integer> {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Alue (otsikko) VALUES (?)");
         
-        //stmnt. setInt(1, t.getId());
         stmnt.setString(1, t.getOtsikko());
         stmnt.execute();
         
-        
-        
-//        Alue alue = new Alue()
-//        
-//        connection.close();
-//        stmnt.close();
+        connection.close();
+        stmnt.close();
         
         return new Alue(t.getOtsikko()); 
-    }
-    
-    public int newId() throws SQLException{ //voi olla helpompikin tapa luoda uusi id, mutta en tähän hätään keksinyt
-        int suurinId =0;
-        for(Alue alue: findAll()){
-            if(alue.getId()>suurinId){
-                suurinId=alue.getId();
-            }
-        }
-        return suurinId+1;
     }
 
 }
