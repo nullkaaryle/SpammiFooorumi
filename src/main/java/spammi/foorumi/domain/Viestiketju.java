@@ -39,15 +39,6 @@ public class Viestiketju {
     public String toString() {
         return this.aihe;
     }
-
-    public int getvMaara() {
-        return vMaara;
-    }
-
-    public void setvMaara(int vMaara) {
-        this.vMaara = vMaara;
-    }
-    
     
     public void lisaaViestienMaaraa(){
         this.vMaara++;

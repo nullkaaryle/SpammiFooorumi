@@ -64,27 +64,34 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         }
         return viestit;
     }
+    
 
     @Override
     public void create(Viesti v) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viesti (nimimerkki, viestiketju, lahetysaika, sisalto) VALUES (?, ?, DATETIME('now', 'localtime'), ?)");
         
-        Viestiketju ketju =v.getViestiketju();
+        Viestiketju ketju = v.getViestiketju();
         ketju.lisaaViestienMaaraa();
         
         stmnt.setString(1, v.getNimimerkki());
         stmnt.setInt(2, ketju.getId());
         stmnt.setString(3, v.getSisalto());
 
-        stmnt.execute();
+        ResultSet rs = stmnt.executeQuery();
+        v.getViestiketju().getAlue().setViimeisinViesti(rs.getTimestamp("lahetysaika"));
+       
+        rs.close();
+        stmnt.close();
         connection.close();
     }
 
     public int countViestit(Viestiketju viestiketju) throws SQLException {
         Connection connection = database.getConnection();
 
-        PreparedStatement stmnt = connection.prepareStatement("SELECT COUNT(nimimerkki) AS maara FROM Viesti WHERE viestiketju= '" + viestiketju.getId() + "'");
+        PreparedStatement stmnt = connection.prepareStatement("SELECT COUNT(nimimerkki) AS maara FROM Viesti WHERE viestiketju = ?");
+        
+        stmnt.setInt(1, viestiketju.getId());
         ResultSet rs = stmnt.executeQuery();
         int maara = Integer.parseInt(rs.getString("maara"));
 

@@ -10,11 +10,11 @@ public class Main {
         Database database = new Database("jdbc:sqlite:spammitestidata.db");
         
         
-        TestiKayttis kayttis = new TestiKayttis(database);
-        kayttis.testaa();
+//        TestiKayttis kayttis = new TestiKayttis(database);
+//        kayttis.testaa();
         
-//        Spammifoorumi foorumi = new Spammifoorumi(database);
-//        foorumi.kaynnista();
+        Spammifoorumi foorumi = new Spammifoorumi(database);
+        foorumi.kaynnista();
 
         
     }

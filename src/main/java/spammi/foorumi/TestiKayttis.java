@@ -36,6 +36,7 @@ public class TestiKayttis {
 //        lisaaAlueViestiketjuJaViesti();
 //        naytaViestit();
         naytaViestitKetjuittainJaAlueittain();
+        naytaViimeisinLahetysaika();
 
     }
 
@@ -95,6 +96,10 @@ public class TestiKayttis {
             }
             System.out.println("* * * * * * * *\n");
         }
+    }
+    
+    public void naytaViimeisinLahetysaika() throws SQLException{
+        System.out.println(vkDao.findLatestLahetysaika(alueDao.findOne(1)));
     }
 
 //    public void lisaaAlueViestiketjuJaViesti() throws SQLException {

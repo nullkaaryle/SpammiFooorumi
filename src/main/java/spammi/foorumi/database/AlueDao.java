@@ -51,6 +51,7 @@ public class AlueDao implements Dao<Alue, Integer> {
         while (rs.next()) {
             Alue alue = new Alue(rs.getInt("id"), rs.getString("otsikko"));
             alue.setVkMaara(vkDao.countKetjujenViestit(alue));
+            alue.setViimeisinViesti(vkDao.findLatestLahetysaika(alue));
             alueet.add(alue);
         }
 

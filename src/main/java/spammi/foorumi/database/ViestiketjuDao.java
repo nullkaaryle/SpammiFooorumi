@@ -81,17 +81,37 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
         
         return ketjut;
     }
+    
+    public Timestamp findLatestLahetysaika(Alue alue) throws SQLException{
+        Connection connection = database.getConnection();
+        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viestiketju vk, Viesti v ON v.viestiketju = vk.id WHERE vk.alue = ? ORDER BY v.lahetysaika DESC LIMIT 1");
+        
+        stmnt.setInt(1, alue.getId());
+        ResultSet rs = stmnt.executeQuery();
+        
+        Timestamp viimeisin = null;
+        
+        while(rs.next()){
+            viimeisin = rs.getTimestamp("lahetysaika");
+        }
+        
+        rs.close();
+        stmnt.close();
+        connection.close();
+        
+        return viimeisin;
+    }
 
     @Override
     public void create(Viestiketju vk) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viestiketju (aihe, alue) VALUES (?, ?)");
         
-        Alue alue = vk.getAlue();
-        alue.lisaaViestiketjujenMaaraa();
+//        Alue alue = vk.getAlue();
+//        alue.lisaaViestiketjujenMaaraa();
         
         stmnt.setString(1, vk.getAihe());
-        stmnt.setInt(2, alue.getId());
+        stmnt.setInt(2, vk.getAlue().getId());
         
         stmnt.execute();
         
@@ -107,21 +127,6 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
         for (Viestiketju vk : ketjut){
             maara += viestiDao.countViestit(vk);
         }
-        
-//        Connection connection = database.getConnection();
-//
-//        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE alue = ?");
-//        
-//        stmnt.setInt(1, alue.getId());
-//        ResultSet rs = stmnt.executeQuery();
-//        
-//        
-//        
-//        int maara = Integer.parseInt(rs.getString("maara"));
-//
-//        rs.close();
-//        stmnt.close();
-//        connection.close();
 
         return maara;
     }

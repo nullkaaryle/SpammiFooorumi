@@ -1,6 +1,8 @@
 
 package spammi.foorumi.domain;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author mari
@@ -9,6 +11,7 @@ public class Alue {
     private int id;
     private String otsikko;
     private int vkMaara;
+    private Timestamp viimeisinViesti;
 
     public Alue(int id, String otsikko) {
         this.id = id;
@@ -39,12 +42,23 @@ public class Alue {
         this.vkMaara++;
     }
 
+    public void setVkMaara(int vkMaara) {
+        this.vkMaara = vkMaara;
+    }
+
+    public void setViimeisinViesti(Timestamp viimeisinViesti) {
+        this.viimeisinViesti = viimeisinViesti;
+    }
+
     public int getVkMaara() {
         return vkMaara;
     }
 
-    public void setVkMaara(int vkMaara) {
-        this.vkMaara = vkMaara;
+    public Timestamp getViimeisinViesti() {
+        return viimeisinViesti;
     }
+    
+    
+    
     
 }

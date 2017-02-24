@@ -28,7 +28,6 @@ public class Spammifoorumi {
         vkDao.setViestiDao(viestiDao);
         viestiDao.setVkDao(vkDao);
         alueDao.setVkDao(vkDao);
-        
     }
 
     public void kaynnista() {

@@ -3,45 +3,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>SpammiFoorumi</title>
-        
+
     </head>
     <body>
-        
+
         <h1>SpammiFoorumi</h1>
-        
+
         <table>
             <tr>
                 <th>Alue</th>
                 <th>Viestejä yhteensä</th>
                 <th>Viimeisin viesti</th>
             </tr>
-            
+
             <tr th:each="alue: ${alueet}">
                 <td>   
                     <a th:href="@{~/alue/{id}(id=${alue.id})}" th:text="${alue.otsikko}"></a>
                 </td>
-                
-            <td>
 
-                <span th:text="${alue.vkMaara}"></span>
-            </td>
-                
-                
-                
+                <td>
+
+                    <span th:text="${alue.vkMaara}"></span>
+                </td>
+
+                <td>
+
+                    <span th:text="${alue.viimeisinViesti}"></span>
+                </td>
+
+
+
             </tr>
-            
-            
-             
+
+
+
         </table>
-        
+
         <h2>Lisää uusi alue</h2>
         <form method="POST" th:action="@{~/alue}">
-            
+
             <input type="text" name="alue"/>
             <input type="submit" value="Lisää"/>
         </form>
-        
+
         <a th:href="@{~/}">Takaisin etusivulle</a>
-       
+
     </body>
 </html>
