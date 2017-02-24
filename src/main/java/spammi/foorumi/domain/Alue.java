@@ -42,4 +42,9 @@ public class Alue {
     public int getVkMaara() {
         return vkMaara;
     }
+
+    public void setVkMaara(int vkMaara) {
+        this.vkMaara = vkMaara;
+    }
+    
 }

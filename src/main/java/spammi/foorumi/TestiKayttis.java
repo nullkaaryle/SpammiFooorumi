@@ -22,18 +22,18 @@ public class TestiKayttis {
         this.vkDao = new ViestiketjuDao(database);
         this.viestiDao = new ViestiDao(database);
         this.lukija = new Scanner(System.in);
+        vkDao.setAlueDao(alueDao);
+        vkDao.setViestiDao(viestiDao);
+        viestiDao.setVkDao(vkDao);
+        alueDao.setVkDao(vkDao);
     }
 
     public void testaa() throws SQLException {
 
 //        naytaAlueet();
-
 //        naytaViestiketjut();
-
 //        viestiketjutAlueittain();
-
 //        lisaaAlueViestiketjuJaViesti();
-
 //        naytaViestit();
         naytaViestitKetjuittainJaAlueittain();
 
@@ -54,7 +54,6 @@ public class TestiKayttis {
     }
 
     //tulostaa viestiketjut alueittain
-
     public void viestiketjutAlueittain() throws SQLException {
         for (Alue alue : alueDao.findAll()) {
             System.out.println(alue.toString() + "\n- - - - - - - -");
@@ -88,9 +87,9 @@ public class TestiKayttis {
         for (Alue alue : alueDao.findAll()) {
             System.out.println(alue.toString() + "\n- - - - - - - -");
             for (Viestiketju ketju : vkDao.findByAlue(alue)) {
-                System.out.println(ketju.toString()+ "\n~ ~ ~ ~ ~ ~ ~ ~");
+                System.out.println(ketju.toString() + "\n~ ~ ~ ~ ~ ~ ~ ~");
                 for (Viesti viesti : viestiDao.findByViestiketju(ketju)) {
-                    System.out.println(viesti.toString()+ "\n~ ~ ~ ~ ~ ~ ~ ~");
+                    System.out.println(viesti.toString() + "\n~ ~ ~ ~ ~ ~ ~ ~");
                 }
                 System.out.println("");
             }
@@ -103,7 +102,6 @@ public class TestiKayttis {
 //        luoViestiketju();
 //        luoViesti();
 //    }
-
 //    //lisää alueen
 //    public void luoAlue() throws SQLException {
 //        System.out.print("Alueen otsikko: ");
@@ -134,5 +132,4 @@ public class TestiKayttis {
 //        Viesti viesti = viestiDao.create(new Viesti(nimimerkki, vk, sisalto));
 //        System.out.println(viesti.toString());
 //    }
-
 }

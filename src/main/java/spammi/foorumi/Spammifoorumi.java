@@ -14,16 +14,21 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
  */
 public class Spammifoorumi {
 
-    Database database;
-    AlueDao alueDao;
-    ViestiketjuDao vkDao;
-    ViestiDao viestiDao;
+    private Database database;
+    private AlueDao alueDao;
+    private ViestiketjuDao vkDao;
+    private ViestiDao viestiDao;
 
     public Spammifoorumi(Database database) {
         this.database = database;
+        this.vkDao = new ViestiketjuDao(database);
         this.alueDao = new AlueDao(database);
         this.viestiDao = new ViestiDao(database);
-        this.vkDao = new ViestiketjuDao(database);
+        vkDao.setAlueDao(alueDao);
+        vkDao.setViestiDao(viestiDao);
+        viestiDao.setVkDao(vkDao);
+        alueDao.setVkDao(vkDao);
+        
     }
 
     public void kaynnista() {

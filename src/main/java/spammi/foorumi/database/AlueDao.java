@@ -12,6 +12,7 @@ import spammi.foorumi.domain.Alue;
 public class AlueDao implements Dao<Alue, Integer> {
 
     Database database;
+    ViestiketjuDao vkDao;
 
     public AlueDao(Database database) {
         this.database = database;
@@ -48,7 +49,9 @@ public class AlueDao implements Dao<Alue, Integer> {
         List<Alue> alueet = new ArrayList();
 
         while (rs.next()) {
-            alueet.add(new Alue(rs.getInt("id"), rs.getString("otsikko")));
+            Alue alue = new Alue(rs.getInt("id"), rs.getString("otsikko"));
+            alue.setVkMaara(vkDao.countKetjujenViestit(alue));
+            alueet.add(alue);
         }
 
         rs.close();
@@ -70,5 +73,11 @@ public class AlueDao implements Dao<Alue, Integer> {
         connection.close();
         
     }
+
+    public void setVkDao(ViestiketjuDao vkDao) {
+        this.vkDao = vkDao;
+    }
+    
+    
 
 }

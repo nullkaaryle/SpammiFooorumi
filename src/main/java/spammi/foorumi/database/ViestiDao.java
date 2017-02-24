@@ -16,7 +16,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
     public ViestiDao(Database database) {
         this.database = database;
-        this.vkDao = new ViestiketjuDao(database);
+        
     }
 
     @Override
@@ -32,14 +32,12 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         ResultSet rs = stmnt.executeQuery();
         List<Viesti> viestit = new ArrayList();
 
-
         while (rs.next()) {
             viestit.add(new Viesti(rs.getInt("id"),
                     rs.getString("nimimerkki"),
                     (vkDao.findOne(rs.getInt("viestiketju"))),
                     rs.getTimestamp("lahetysaika"),
                     rs.getString("sisalto")));
-
         }
 
         rs.close();
@@ -95,6 +93,10 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         connection.close();
 
         return maara;
+    }
+
+    public void setVkDao(ViestiketjuDao vkDao) {
+        this.vkDao = vkDao;
     }
 
 }

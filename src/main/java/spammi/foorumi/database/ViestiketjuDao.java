@@ -13,10 +13,10 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
     
     private Database database;
     private AlueDao alueDao;
+    private ViestiDao viestiDao;
 
     public ViestiketjuDao(Database database) {
         this.database = database;
-        this.alueDao = new AlueDao(database);
     }
 
     @Override
@@ -98,6 +98,44 @@ public class ViestiketjuDao implements Dao <Viestiketju, Integer> {
         stmnt.close();
         connection.close();
     }
+    
+    public int countKetjujenViestit(Alue alue) throws SQLException {
+        
+        List <Viestiketju> ketjut = findByAlue(alue);
+        
+        int maara = 0;
+        for (Viestiketju vk : ketjut){
+            maara += viestiDao.countViestit(vk);
+        }
+        
+//        Connection connection = database.getConnection();
+//
+//        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viestiketju WHERE alue = ?");
+//        
+//        stmnt.setInt(1, alue.getId());
+//        ResultSet rs = stmnt.executeQuery();
+//        
+//        
+//        
+//        int maara = Integer.parseInt(rs.getString("maara"));
+//
+//        rs.close();
+//        stmnt.close();
+//        connection.close();
+
+        return maara;
+    }
+
+    public void setAlueDao(AlueDao alueDao) {
+        this.alueDao = alueDao;
+    }
+
+    public void setViestiDao(ViestiDao viestiDao) {
+        this.viestiDao = viestiDao;
+    }
+    
+    
+    
 
     
     

@@ -43,6 +43,11 @@ public class Viestiketju {
     public int getvMaara() {
         return vMaara;
     }
+
+    public void setvMaara(int vMaara) {
+        this.vMaara = vMaara;
+    }
+    
     
     public void lisaaViestienMaaraa(){
         this.vMaara++;
