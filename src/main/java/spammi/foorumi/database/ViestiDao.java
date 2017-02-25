@@ -78,10 +78,9 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         stmnt.setInt(2, ketju.getId());
         stmnt.setString(3, v.getSisalto());
 
-        ResultSet rs = stmnt.executeQuery();
-        v.getViestiketju().getAlue().setViimeisinViesti(rs.getTimestamp("lahetysaika"));
-       
-        rs.close();
+        stmnt.execute();
+        //v.getViestiketju().getAlue().setViimeisinViesti(rs.getTimestamp("lahetysaika"));
+
         stmnt.close();
         connection.close();
     }
