@@ -10,6 +10,16 @@
         <h1>SpammiFoorumi</h1>
 
         <table>
+            
+            <tr>
+                <th>
+                    Alue: <span th:text="${alue.otsikko}"></span>
+                </th>
+                
+                <th>Viestejä yhteensä</th>
+                <th>Viimeisin viesti</th>
+            </tr>
+            
             <tr th:each="ketju: ${ketjut}">
                 <td>   
                     <a th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.aihe}"></a>

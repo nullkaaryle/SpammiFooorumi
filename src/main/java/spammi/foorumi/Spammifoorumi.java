@@ -71,6 +71,7 @@ public class Spammifoorumi {
 
             data.put("ketjut", vkDao.findByAlue(alueDao.findOne(id)));
             data.put("alueId", id);
+            data.put("alue",alueDao.findOne(id)); //lisäsin tän, koska otsikkoon tarvii alueen nimen
             return new ModelAndView(data, "viestiketjut");
         }, new ThymeleafTemplateEngine());
     }
