@@ -10,37 +10,36 @@
         <h1>SpammiFoorumi</h1>
 
         <table>
-            
+
             <tr>
                 <th>
                     Alue: <span th:text="${alue.otsikko}"></span>
                 </th>
-                
+
                 <th>Viestejä yhteensä</th>
                 <th>Viimeisin viesti</th>
             </tr>
-            
+
             <tr th:each="ketju: ${ketjut}">
+
                 <td>   
                     <a th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.aihe}"></a>
                 </td>
 
-                <td>
-                    <!--<span th:text="${maara.vMaara}"></span>-->
+                <td 
+                    th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.getvMaara()}">
                 </td>
 
+                <td
+                    th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.getViimeisinViesti()}">
+                </td>
 
             </tr>
 
         </table>
 
-        <h2>Lisää uusi viestiketju, toimii, ole varovainen!</h2>
-        <!-- th:actionin polku on nyt oikein: id-muuttuja saadaan samasta data-Mapista kuin ketjutkin, 
-        mutta id pitää antaa Mapille get-metodissa.  Siinä voi antaa useampia arvoja, 
-        ja oispa joku materiaali sen kertonut jo vähän aiemmin.
-        Onhan se kyllä Map, että olisi sen voinut ehkä itsekin tajuta jo keskiviikkona, mutta äh. 
-        Nyt id on mäpätty get-metodiin avaimella "alueId" ja arvona on alueen id
-        ja näin se kerrotaan samalla tavalla kuin tuossa ylempänä tuo viittaus-->
+        <h2>Lisää uusi viestiketju</h2>
+
         <form method="POST" th:action="@{~/alue/{id}/viestiketju(id=${alueId})}">
 
             <input type="text" name="viestiketju"/>

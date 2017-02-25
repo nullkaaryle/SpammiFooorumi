@@ -72,7 +72,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viesti (nimimerkki, viestiketju, lahetysaika, sisalto) VALUES (?, ?, DATETIME('now', 'localtime'), ?)");
         
         Viestiketju ketju = v.getViestiketju();
-        ketju.lisaaViestienMaaraa();
+       // ketju.lisaaViestienMaaraa();
         
         stmnt.setString(1, v.getNimimerkki());
         stmnt.setInt(2, ketju.getId());

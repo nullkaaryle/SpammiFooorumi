@@ -32,26 +32,39 @@ public class Spammifoorumi {
 
     public void kaynnista() {
 
-        get("/", (req, res) -> {  //puuttuu vielä viestien ajat, viestien määrä ehkä toimii
+        get("/", (req, res) -> {
             HashMap<String, Object> data = new HashMap();
             data.put("alueet", alueDao.findAll());
 
             return new ModelAndView(data, "aihealueet");
         }, new ThymeleafTemplateEngine());
 
+        
         post("/alue", (req, res) -> {
-            if (!req.queryParams("alue").isEmpty()) {
 
+            if (!req.queryParams("alue").isEmpty()) {
                 Alue alue = new Alue(req.queryParams("alue"));
                 alueDao.create(alue);
             }
+
             res.redirect("/");
             return "";
         });
 
+        
+        get("/alue/:id", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+
+            HashMap<String, Object> data = new HashMap();
+            data.put("ketjut", vkDao.findByAlue(alueDao.findOne(id)));
+            data.put("alueId", id);
+            data.put("alue", alueDao.findOne(id)); //lisäsin tän, koska otsikkoon tarvii alueen nimen
+
+            return new ModelAndView(data, "viestiketjut");
+        }, new ThymeleafTemplateEngine());
+
+        
         post("/alue/:id/viestiketju", (req, res) -> {
-            //pitäisi toimia, ongelma kai html:ssä. 
-            //Oli oikein! Ei muutoksia tehty tähän!
             int id = Integer.parseInt(req.params(":id"));
 
             if (!req.queryParams("viestiketju").isEmpty()) {
@@ -62,18 +75,5 @@ public class Spammifoorumi {
             return "";
         });
 
-        //Tähän tuli muutos! Lisätty uusi rivi "data.put("alueId", id); 
-        //jolla talletetaan alueen id data-Mapiin mukaan, jotta se voidaan 
-        //poimia jotenkin viestiketjut.html:ässä.
-        get("/alue/:id", (req, res) -> {
-            int id = Integer.parseInt(req.params(":id"));
-            HashMap<String, Object> data = new HashMap();
-
-            data.put("ketjut", vkDao.findByAlue(alueDao.findOne(id)));
-            data.put("alueId", id);
-            data.put("alue",alueDao.findOne(id)); //lisäsin tän, koska otsikkoon tarvii alueen nimen
-            return new ModelAndView(data, "viestiketjut");
-        }, new ThymeleafTemplateEngine());
     }
-
 }

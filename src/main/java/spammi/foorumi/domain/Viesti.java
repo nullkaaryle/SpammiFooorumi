@@ -1,4 +1,3 @@
-
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
@@ -12,9 +11,7 @@ public class Viesti {
     private int id;
     private String nimimerkki;
     private Viestiketju viestiketju;
-
     private Timestamp lahetysaika;
-
     private String sisalto;
 
     public Viesti(int id, String nimimerkki, Viestiketju viestiketju, Timestamp lahetysaika, String sisalto) {

@@ -38,9 +38,9 @@ public class Alue {
         return this.otsikko;
     }
 
-    public void lisaaViestiketjujenMaaraa() {
-        this.vkMaara++;
-    }
+   // public void lisaaViestiketjujenMaaraa() {
+   //     this.vkMaara++;
+   // }
 
     public void setVkMaara(int vkMaara) {
         this.vkMaara = vkMaara;
