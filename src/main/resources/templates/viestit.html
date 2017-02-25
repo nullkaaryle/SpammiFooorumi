@@ -13,8 +13,8 @@
 
             <tr>
                 <th> 
-                    Alue: <span th:text="${alue.otsikko}" ></span> 
-                    -> <span th:text="${viestiketju.aihe}"></span>
+                    <i>Alue: <span th:text="${alue.otsikko}" ></span> 
+                    -> <span th:text="${viestiketju.aihe}"></span></i>
                 </th>
             </tr>
 
@@ -37,7 +37,7 @@
                 <td>   
                     <span th:text="${viesti.lahetysaika}"></span>
                 </td> 
-                
+
                 <td>   
                     <span th:text="${viesti.nimimerkki}"></span>
                 </td> 
@@ -47,16 +47,18 @@
         </table>
 
 
-        <h2>Lisää uusi viesti</h2>
-
+        <h3>Lisää uusi viesti</h3>
 
         <form method="POST" th:action="@{~/alue/{alueid}/viestiketju/{viestiketjuid}(alueid=${alueId},viestiketjuid=${viestiketjuId})}"> 
 
             <span>Nimimerkki:</span>
             <input type="text" name="nimimerkki"/>
-            <span>Sisälto:</span>
-            <input type="text" name="sisalto"/>
-            
+
+            <span>Viestin sisältö:</span>
+
+            <textarea id="sisalto" name="sisalto"> </textarea>
+           
+
             <input type="submit" value="Lisää"/>
 
         </form> 
