@@ -79,13 +79,14 @@ public class Spammifoorumi {
             HashMap<String, Object> data = new HashMap();
             data.put("viestit", viestiDao.findByViestiketju(vkDao.findOne(viestiketjuId)));
             data.put("alueId", alueId);
+            data.put("viestiketjuId", viestiketjuId);
             data.put("alue", alueDao.findOne(alueId));
             data.put("viestiketju", vkDao.findOne(viestiketjuId));
 
             return new ModelAndView(data, "viestit");
         }, new ThymeleafTemplateEngine());
 
-        post("alue/:alueId/viestiketju/:viestiketjuId/", (req, res) -> {
+        post("alue/:alueId/viestiketju/:viestiketjuId", (req, res) -> {
             String nimimerkki = req.queryParams("nimimerkki").trim();
             String sisalto = req.queryParams("sisalto").trim();
 
@@ -101,7 +102,7 @@ public class Spammifoorumi {
                 viestiDao.create(viesti);
             }
 
-            res.redirect("/alue/" + alueId + "viestiketju/" + viestiketjuId);
+            res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId);
             return "";
         });
 

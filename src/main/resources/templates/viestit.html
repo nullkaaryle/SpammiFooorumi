@@ -50,8 +50,7 @@
         <h2>Lisää uusi viesti</h2>
 
 
-        <form method="POST" th:action="@{~/alue/{alueId}/viestiketju/{viestiketjuId}
-              (alueid=${alueId},viestiketjuId=${viestiketjuId})}"> 
+        <form method="POST" th:action="@{~/alue/{alueid}/viestiketju/{viestiketjuid}(alueid=${alueId},viestiketjuid=${viestiketjuId})}"> 
 
             <span>Nimimerkki:</span>
             <input type="text" name="nimimerkki"/>
@@ -67,5 +66,3 @@
     </body>
 
 </html>
-
-<!-- muistilappu-->
