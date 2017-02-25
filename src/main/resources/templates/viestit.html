@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>SpammiFoorumi</title>
+    </head>
+
+    <body>
+        <h1>SpammiFoorumi</h1>
+
+        <table>
+
+            <tr>
+
+                <th>
+                    <!--Sivulla pitäisi lukea [Alue:alueen nimi -> Viestiketjun nimi--> 
+                </th>
+
+            </tr>
+
+
+            <tr> <!-- th:each jokaiselle viestille jne. --> 
+                
+                <!--tähän viestien listaus, 
+                yhdellä rivillä pitäisi olla 
+                eka juokseva numero (ei viesti id käsittääkseni!), 
+                sitten  viestin sisältö, 
+                ja kolmantena rivillä kirjoittaja --> 
+            </tr>
+
+        </table>
+
+        
+        <h2>Lisää uusi viesti</h2>
+
+<!-- 
+       <form method="POST" th:action=> 
+
+            <input type="text" name="viesti"/>
+            <input type="submit" value="Lisää"/>
+
+        </form> 
+--> 
+        <a th:href="@{~/}">Takaisin etusivulle</a>
+
+    </body>
+
+</html>
+
+<!-- muistilappu-->

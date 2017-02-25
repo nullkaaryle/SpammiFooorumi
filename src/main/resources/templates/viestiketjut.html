@@ -23,7 +23,7 @@
             <tr th:each="ketju: ${ketjut}">
 
                 <td>   
-                    <a th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.aihe}"></a>
+                    <a th:href="@{~/alue/{alueId}/viestiketju/{viestiketjuId}(alueId=${ketju.alue.id},viestiketjuId=${ketju.id})}" th:text="${ketju.aihe}"></a>
                 </td>
 
                 <td 

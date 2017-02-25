@@ -74,6 +74,18 @@ public class Spammifoorumi {
             res.redirect("/alue/" + id);
             return "";
         });
+        
+         get("/alue/:alueId/viestiketju/:viestiketjuId", (req, res) -> {
+            int alueId = Integer.parseInt(req.params(":alueId"));
+            int viestiketjuId = Integer.parseInt(req.params(":viestiketjuId"));
+
+            HashMap<String, Object> data = new HashMap();
+            data.put("viestit", viestiDao.findByViestiketju(vkDao.findOne(viestiketjuId)));
+            data.put("alueId", alueId);
+            data.put("ketjunAihe", vkDao.findOne(viestiketjuId));
+
+            return new ModelAndView(data, "viestit");
+        }, new ThymeleafTemplateEngine());
 
     }
 }
