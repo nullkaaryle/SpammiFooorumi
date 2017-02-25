@@ -12,36 +12,56 @@
         <table>
 
             <tr>
-
-                <th>
-                    <!--Sivulla pitäisi lukea [Alue:alueen nimi -> Viestiketjun nimi--> 
+                <th> 
+                    Alue: <span th:text="${alue.otsikko}" ></span> 
+                    -> <span th:text="${viestiketju.aihe}"></span>
                 </th>
-
             </tr>
 
+            <tr>
+                <th> 
 
-            <tr> <!-- th:each jokaiselle viestille jne. --> 
+                </th>
+            </tr>
+
+            <tr th:each="viesti,iter: ${viestit}"> 
+
+                <td>   
+                    ( <span th:text="${iter.index + 1}"></span> )
+                </td>
+
+                <td>   
+                    <span th:text="${viesti.sisalto}"></span>
+                </td> 
+
+                <td>   
+                    <span th:text="${viesti.lahetysaika}"></span>
+                </td> 
                 
-                <!--tähän viestien listaus, 
-                yhdellä rivillä pitäisi olla 
-                eka juokseva numero (ei viesti id käsittääkseni!), 
-                sitten  viestin sisältö, 
-                ja kolmantena rivillä kirjoittaja --> 
+                <td>   
+                    <span th:text="${viesti.nimimerkki}"></span>
+                </td> 
+
             </tr>
 
         </table>
 
-        
+
         <h2>Lisää uusi viesti</h2>
 
-<!-- 
-       <form method="POST" th:action=> 
 
-            <input type="text" name="viesti"/>
+        <form method="POST" th:action="@{~/alue/{alueId}/viestiketju/{viestiketjuId}
+              (alueid=${alueId},viestiketjuId=${viestiketjuId})}"> 
+
+            <span>Nimimerkki:</span>
+            <input type="text" name="nimimerkki"/>
+            <span>Sisälto:</span>
+            <input type="text" name="sisalto"/>
+            
             <input type="submit" value="Lisää"/>
 
         </form> 
---> 
+
         <a th:href="@{~/}">Takaisin etusivulle</a>
 
     </body>

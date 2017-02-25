@@ -39,7 +39,6 @@ public class Spammifoorumi {
             return new ModelAndView(data, "aihealueet");
         }, new ThymeleafTemplateEngine());
 
-        
         post("/alue", (req, res) -> {
 
             if (!req.queryParams("alue").isEmpty()) {
@@ -51,7 +50,6 @@ public class Spammifoorumi {
             return "";
         });
 
-        
         get("/alue/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
 
@@ -63,7 +61,6 @@ public class Spammifoorumi {
             return new ModelAndView(data, "viestiketjut");
         }, new ThymeleafTemplateEngine());
 
-        
         post("/alue/:id/viestiketju", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
 
@@ -74,18 +71,39 @@ public class Spammifoorumi {
             res.redirect("/alue/" + id);
             return "";
         });
-        
-         get("/alue/:alueId/viestiketju/:viestiketjuId", (req, res) -> {
+
+        get("/alue/:alueId/viestiketju/:viestiketjuId", (req, res) -> {
             int alueId = Integer.parseInt(req.params(":alueId"));
             int viestiketjuId = Integer.parseInt(req.params(":viestiketjuId"));
 
             HashMap<String, Object> data = new HashMap();
             data.put("viestit", viestiDao.findByViestiketju(vkDao.findOne(viestiketjuId)));
             data.put("alueId", alueId);
-            data.put("ketjunAihe", vkDao.findOne(viestiketjuId));
+            data.put("alue", alueDao.findOne(alueId));
+            data.put("viestiketju", vkDao.findOne(viestiketjuId));
 
             return new ModelAndView(data, "viestit");
         }, new ThymeleafTemplateEngine());
+
+        post("alue/:alueId/viestiketju/:viestiketjuId/", (req, res) -> {
+            String nimimerkki = req.queryParams("nimimerkki").trim();
+            String sisalto = req.queryParams("sisalto").trim();
+
+            int alueId = Integer.parseInt(req.params(":alueId"));
+            int viestiketjuId = Integer.parseInt(req.params(":viestiketjuId"));
+
+            if (nimimerkki.isEmpty()) {
+                nimimerkki = "Anonyymi";
+            }
+
+            if (!sisalto.isEmpty()) {
+                Viesti viesti = new Viesti(nimimerkki, vkDao.findOne(viestiketjuId), sisalto);
+                viestiDao.create(viesti);
+            }
+
+            res.redirect("/alue/" + alueId + "viestiketju/" + viestiketjuId);
+            return "";
+        });
 
     }
 }
