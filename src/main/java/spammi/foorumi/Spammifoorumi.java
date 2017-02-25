@@ -35,7 +35,7 @@ public class Spammifoorumi {
         get("/", (req, res) -> {  //puuttuu vielä viestien ajat, viestien määrä ehkä toimii
             HashMap<String, Object> data = new HashMap();
             data.put("alueet", alueDao.findAll());
-         
+
             return new ModelAndView(data, "aihealueet");
         }, new ThymeleafTemplateEngine());
 
@@ -50,7 +50,8 @@ public class Spammifoorumi {
         });
 
         post("/alue/:id/viestiketju", (req, res) -> {
-            //pitäisi toimia, ongelma kai html:ssä
+            //pitäisi toimia, ongelma kai html:ssä. 
+            //Oli oikein! Ei muutoksia tehty tähän!
             int id = Integer.parseInt(req.params(":id"));
 
             if (!req.queryParams("viestiketju").isEmpty()) {
@@ -61,11 +62,15 @@ public class Spammifoorumi {
             return "";
         });
 
-        get("/alue/:id", (req, res) -> { 
+        //Tähän tuli muutos! Lisätty uusi rivi "data.put("alueId", id); 
+        //jolla talletetaan alueen id data-Mapiin mukaan, jotta se voidaan 
+        //poimia jotenkin viestiketjut.html:ässä.
+        get("/alue/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
             HashMap<String, Object> data = new HashMap();
 
             data.put("ketjut", vkDao.findByAlue(alueDao.findOne(id)));
+            data.put("alueId", id);
             return new ModelAndView(data, "viestiketjut");
         }, new ThymeleafTemplateEngine());
     }
