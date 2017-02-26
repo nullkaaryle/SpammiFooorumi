@@ -63,12 +63,13 @@ public class Spammifoorumi {
 
         post("/alue/:id/viestiketju", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
+            int viestiketjuId = Integer.parseInt(req.queryParams("viestiketju"));
 
             if (!req.queryParams("viestiketju").isEmpty()) {
                 vkDao.create(new Viestiketju(req.queryParams("viestiketju"), alueDao.findOne(id)));
             }
 
-            res.redirect("/alue/" + id);
+            res.redirect("/alue/" + id + "/viestiketju/" + viestiketjuId);
             return "";
         });
 

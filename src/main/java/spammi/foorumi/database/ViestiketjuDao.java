@@ -58,7 +58,8 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
                 + "FROM Viestiketju vk\n"
                 + "LEFT JOIN Viesti v ON vk.id = v.viestiketju\n"
                 + "WHERE vk.alue = ?\n"
-                + "GROUP BY vk.id, vk.alue, vk.aihe;");
+                + "GROUP BY vk.id, vk.alue, vk.aihe\n"
+                + "ORDER BY viimeisinLahetysaika DESC;");
 
         stmnt.setInt(1, alue.getId());
         ResultSet rs = stmnt.executeQuery();
@@ -91,7 +92,8 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
                 "SELECT vk.id, vk.alue, vk.aihe, COUNT(v.id) AS viestienMaara, MAX(v.lahetysaika) AS viimeisinLahetysaika\n"
                 + "FROM Viestiketju vk\n"
                 + "LEFT JOIN Viesti v ON vk.id = v.viestiketju\n"
-                + "GROUP BY vk.id, vk.alue, vk.aihe;");
+                + "GROUP BY vk.id, vk.alue, vk.aihe\n"
+                + "ORDER BY viimeisinLahetysaika DESC\n;");
 
         ResultSet rs = stmnt.executeQuery();
         List<Viestiketju> ketjut = new ArrayList();
