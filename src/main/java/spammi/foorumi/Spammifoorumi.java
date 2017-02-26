@@ -61,15 +61,25 @@ public class Spammifoorumi {
             return new ModelAndView(data, "viestiketjut");
         }, new ThymeleafTemplateEngine());
 
-        post("/alue/:id/viestiketju", (req, res) -> {
+        post("/alue/:id/viestiketju", (req, res) -> {  //ei toimi,ei löydä viestiketjun Id:tä ja kommentoitu id on musta aika mahoton
             int id = Integer.parseInt(req.params(":id"));
-            int viestiketjuId = Integer.parseInt(req.queryParams("viestiketju"));
+//            int viestiketjuId = Integer.parseInt(req.queryParams("viestiketju"));
+            String nimimerkki = req.queryParams("nimimerkki").trim();
+            String sisalto = req.queryParams("sisalto").trim();
 
-            if (!req.queryParams("viestiketju").isEmpty()) {
-                vkDao.create(new Viestiketju(req.queryParams("viestiketju"), alueDao.findOne(id)));
+            if (!(req.queryParams("viestiketju").isEmpty() && req.queryParams("sisalto").isEmpty())) {
+                Viestiketju ketju = new Viestiketju(req.queryParams("viestiketju"), alueDao.findOne(id));
+                vkDao.create(ketju);
+
+                if (nimimerkki.isEmpty()) {
+                    nimimerkki = "Anonyymi";
+                }
+                Viesti viesti = new Viesti(nimimerkki, ketju, sisalto);
+                viestiDao.create(viesti);
+
+                res.redirect("/alue/" + id + "/viestiketju/" + ketju.getId());
             }
-
-            res.redirect("/alue/" + id + "/viestiketju/" + viestiketjuId);
+//            res.redirect("/alue/" + id + "/viestiketju/" + ketju.getId());
             return "";
         });
 
