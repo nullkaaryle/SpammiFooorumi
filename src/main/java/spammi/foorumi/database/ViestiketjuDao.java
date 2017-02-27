@@ -126,7 +126,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
                 + "WHERE vk.alue = ?\n"
                 + "GROUP BY vk.id, vk.alue, vk.aihe\n"
                 + "ORDER BY viimeisinLahetysaika DESC"
-                + "LIMIT 10 OFFSET ?;");
+                + "LIMIT 10 OFFSET ?");
         
         stmnt.setInt(1, alue.getId());
         stmnt.setInt(2, offset);
@@ -155,7 +155,9 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
     public Timestamp findLatestLahetysaika(Alue alue) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viestiketju vk, Viesti v ON v.viestiketju = vk.id WHERE vk.alue = ? ORDER BY v.lahetysaika DESC LIMIT 1");
+        PreparedStatement stmnt = connection.prepareStatement(
+                                    "SELECT * FROM Viestiketju vk, Viesti v ON v.viestiketju = vk.id "
+                                    + "WHERE vk.alue = ? ORDER BY v.lahetysaika DESC LIMIT 1");
 
         stmnt.setInt(1, alue.getId());
         ResultSet rs = stmnt.executeQuery();
@@ -177,9 +179,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
     public void create(Viestiketju vk) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viestiketju (aihe, alue) VALUES (?, ?)");
-
-//        Alue alue = vk.getAlue();
-//        alue.lisaaViestiketjujenMaaraa();
+        
         stmnt.setString(1, vk.getAihe());
         stmnt.setInt(2, vk.getAlue().getId());
 

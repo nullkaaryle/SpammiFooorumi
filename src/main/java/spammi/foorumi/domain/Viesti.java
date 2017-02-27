@@ -1,6 +1,7 @@
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -33,10 +34,8 @@ public class Viesti {
     }
 
 
-    public Timestamp getLahetysaika() {
-
-
-        return lahetysaika;
+    public String getLahetysaika() {
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.lahetysaika);
     }
 
     public String getNimimerkki() {
@@ -51,6 +50,7 @@ public class Viesti {
         return viestiketju;
     }
     
+    @Override
     public String toString() {
         return this.nimimerkki +" kirjoitti: \n" + this.sisalto +"\n"+ this.lahetysaika;
     }

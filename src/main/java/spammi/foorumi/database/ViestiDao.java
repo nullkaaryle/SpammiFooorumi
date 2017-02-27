@@ -49,7 +49,8 @@ public class ViestiDao implements Dao<Viesti, Integer> {
 
     public List<Viesti> findByViestiketju(Viestiketju ketju) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viesti WHERE Viestiketju = ?");
+        PreparedStatement stmnt = connection.prepareStatement(
+                                "SELECT * FROM Viesti WHERE Viestiketju = ?");
 
         stmnt.setInt(1, ketju.getId());
         ResultSet rs = stmnt.executeQuery();
@@ -74,18 +75,16 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     @Override
     public void create(Viesti v) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Viesti (nimimerkki, viestiketju, lahetysaika, sisalto) VALUES (?, ?, DATETIME('now', 'localtime'), ?)");
-        
-        Viestiketju ketju = v.getViestiketju();
-       // ketju.lisaaViestienMaaraa();
+        PreparedStatement stmnt = connection.prepareStatement(
+                                    "INSERT INTO Viesti "
+                                    + "(nimimerkki, viestiketju, lahetysaika, sisalto) "
+                                    + "VALUES (?, ?, DATETIME('now', 'localtime'), ?)");
         
         stmnt.setString(1, v.getNimimerkki());
-        stmnt.setInt(2, ketju.getId());
+        stmnt.setInt(2, v.getViestiketju().getId());
         stmnt.setString(3, v.getSisalto());
 
         stmnt.execute();
-        
-        //v.getViestiketju().getAlue().setViimeisinViesti(rs.getTimestamp("lahetysaika"));
 
         stmnt.close();
         connection.close();
@@ -94,9 +93,12 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     public int countViestit(Viestiketju viestiketju) throws SQLException {
         Connection connection = database.getConnection();
 
-        PreparedStatement stmnt = connection.prepareStatement("SELECT COUNT(nimimerkki) AS maara FROM Viesti WHERE viestiketju = ?");
+        PreparedStatement stmnt = connection.prepareStatement(
+                                    "SELECT COUNT(nimimerkki) AS maara "
+                                     + "FROM Viesti WHERE viestiketju = ?");
         
         stmnt.setInt(1, viestiketju.getId());
+        
         ResultSet rs = stmnt.executeQuery();
         int maara = Integer.parseInt(rs.getString("maara"));
 

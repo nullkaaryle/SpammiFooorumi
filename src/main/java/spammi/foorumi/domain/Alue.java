@@ -2,6 +2,7 @@
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -38,10 +39,6 @@ public class Alue {
         return this.otsikko;
     }
 
-   // public void lisaaViestiketjujenMaaraa() {
-   //     this.vkMaara++;
-   // }
-
     public void setVkMaara(int vkMaara) {
         this.vkMaara = vkMaara;
     }
@@ -55,7 +52,8 @@ public class Alue {
     }
 
     public Timestamp getViimeisinViesti() {
-        return viimeisinViesti;
+        //return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.viimeisinViesti);
+        return this.viimeisinViesti;
     }
     
     

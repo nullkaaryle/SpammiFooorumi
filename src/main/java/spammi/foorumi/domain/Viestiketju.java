@@ -50,16 +50,8 @@ public class Viestiketju {
         return this.aihe;
     }
     
-   // public void lisaaViestienMaaraa(){
-   //     this.viestimaara++;
-   // }
-
     public void setvMaara(int vMaara) {
         this.viestimaara = vMaara;
-    }
-
-    public void setViimeisinViesti(Timestamp viimeisinViesti) {
-        this.viimeisinViesti = viimeisinViesti;
     }
 
     public int getvMaara() {
