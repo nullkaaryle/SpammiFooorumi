@@ -5,6 +5,7 @@ import spammi.foorumi.database.*;
 import spammi.foorumi.domain.*;
 import spark.ModelAndView;
 import static spark.Spark.get;
+import static spark.Spark.port;
 import static spark.Spark.post;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
@@ -31,6 +32,11 @@ public class Spammifoorumi {
     }
 
     public void kaynnista() {
+        
+        if (System.getenv("PORT") != null) {
+            port(Integer.valueOf(System.getenv("PORT")));
+        }
+        
 
         get("/", (req, res) -> {
             HashMap<String, Object> data = new HashMap();
@@ -74,10 +80,12 @@ public class Spammifoorumi {
                 if (nimimerkki.isEmpty()) {
                     nimimerkki = "Anonyymi";
                 }
-                Viesti viesti = new Viesti(nimimerkki, ketju, sisalto);
+                
+                Viestiketju vk = vkDao.findViimeisin();
+                Viesti viesti = new Viesti(nimimerkki, vk, sisalto);
                 viestiDao.create(viesti);
 
-                res.redirect("/alue/" + id + "/viestiketju/" + ketju.getId());
+                res.redirect("/alue/" + id + "/viestiketju/" + vk.getId());
             }
 //            res.redirect("/alue/" + id + "/viestiketju/" + ketju.getId());
             return "";

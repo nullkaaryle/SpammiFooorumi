@@ -148,7 +148,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         stmnt.setInt(2, vk.getAlue().getId());
 
         stmnt.execute();
-
+        
         stmnt.close();
         connection.close();
     }
@@ -164,6 +164,22 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
         return maara;
     }
+    
+    public Viestiketju findViimeisin() throws SQLException{
+        Connection c = database.getConnection();
+        PreparedStatement stmnt = c.prepareStatement("SELECT * FROM Viestiketju ORDER BY id DESC LIMIT 1");
+        
+        ResultSet rs = stmnt.executeQuery();
+        Viestiketju vk = new Viestiketju(rs.getInt("id"), 
+                                rs.getString("aihe"), alueDao.findOne(rs.getInt("alue")));
+        
+        rs.close();
+        stmnt.close();
+        c.close();
+        
+        return vk;
+    }
+    
 
     public void setAlueDao(AlueDao alueDao) {
         this.alueDao = alueDao;

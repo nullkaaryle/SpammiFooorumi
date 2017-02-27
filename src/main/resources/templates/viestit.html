@@ -9,14 +9,14 @@
     <body>
         <h1>SpammiFoorumi</h1>
 
+
+
+        <div><b><i>Alue: <span th:text="${alue.otsikko}" ></span>
+            -> <span th:text="${viestiketju.aihe}"></span></i></b></div>
+
+
         <table>
 
-            <tr>
-                <th> 
-                    <i>Alue: <span th:text="${alue.otsikko}" ></span> 
-                    -> <span th:text="${viestiketju.aihe}"></span></i>
-                </th>
-            </tr>
 
             <tr>
                 <th> 
@@ -27,7 +27,7 @@
             <tr th:each="viesti,iter: ${viestit}"> 
 
                 <td>   
-                    ( <span th:text="${iter.index + 1}"></span> )
+                    (<span th:text="${iter.index + 1}"></span>)
                 </td>
 
                 <td>   
@@ -39,7 +39,7 @@
                 </td> 
 
                 <td>   
-                    <span th:text="${viesti.nimimerkki}"></span>
+                    t. <span th:text="${viesti.nimimerkki}"></span>
                 </td> 
 
             </tr>
@@ -57,7 +57,7 @@
             <span>Viestin sisältö:</span>
 
             <textarea id="sisalto" name="sisalto"> </textarea>
-           
+
 
             <input type="submit" value="Lisää"/>
 

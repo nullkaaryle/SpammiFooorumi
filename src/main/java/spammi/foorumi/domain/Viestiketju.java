@@ -26,6 +26,12 @@ public class Viestiketju {
         this.aihe = aihe;
         this.alue = alue;
     }
+    
+    public Viestiketju(int id, String aihe, Alue alue){
+        this.id = id;
+        this.aihe = aihe;
+        this.alue = alue;
+    }
 
     public int getId() {
         return id;

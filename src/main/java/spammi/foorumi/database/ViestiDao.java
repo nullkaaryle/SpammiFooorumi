@@ -62,6 +62,11 @@ public class ViestiDao implements Dao<Viesti, Integer> {
                     rs.getTimestamp("lahetysaika"),
                     rs.getString("sisalto")));
         }
+        
+        rs.close();
+        stmnt.close();
+        connection.close();
+        
         return viestit;
     }
     
@@ -79,6 +84,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         stmnt.setString(3, v.getSisalto());
 
         stmnt.execute();
+        
         //v.getViestiketju().getAlue().setViimeisinViesti(rs.getTimestamp("lahetysaika"));
 
         stmnt.close();
