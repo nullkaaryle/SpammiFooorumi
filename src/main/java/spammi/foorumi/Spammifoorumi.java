@@ -19,6 +19,7 @@ public class Spammifoorumi {
     private AlueDao alueDao;
     private ViestiketjuDao vkDao;
     private ViestiDao viestiDao;
+    private int sivunumero;
 
     public Spammifoorumi(Database database) {
         this.database = database;
@@ -29,6 +30,7 @@ public class Spammifoorumi {
         vkDao.setViestiDao(viestiDao);
         viestiDao.setVkDao(vkDao);
         alueDao.setVkDao(vkDao);
+        this.sivunumero = 0;
     }
 
     public void kaynnista() {
@@ -55,6 +57,28 @@ public class Spammifoorumi {
             res.redirect("/");
             return "";
         });
+        
+        get("/alue/:id/sivu/:sivunumero", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+            sivunumero = Integer.parseInt(req.params(":sivunumero"));
+            if (sivunumero < 0 || req.params(":sivunumero").isEmpty()){
+                sivunumero = 0;
+            }
+            
+            HashMap<String, Object> data = new HashMap();
+            data.put("ketjut", vkDao.findNextTen(alueDao.findOne(id), sivunumero*10));
+            data.put("alueId", id);
+            data.put("alue", alueDao.findOne(id));
+            data.put("sivunumero", 1);
+            
+            return new ModelAndView(data, "viestiketjut");
+        }, new ThymeleafTemplateEngine());
+        
+//        post("/alue/:id/sivu/:sivunumero", (req, res) -> {
+//            
+//            res.redirect("");
+//            return "";
+//        })
 
         get("/alue/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));

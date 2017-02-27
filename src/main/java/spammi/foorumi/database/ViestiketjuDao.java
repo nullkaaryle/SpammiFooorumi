@@ -117,6 +117,42 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         return ketjut;
     }
 
+    public List<Viestiketju> findNextTen(Alue alue, int offset) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmnt = connection.prepareStatement(
+                "SELECT vk.id, vk.alue, vk.aihe, COUNT(v.id) AS viestienMaara, MAX(v.lahetysaika) AS viimeisinLahetysaika\n"
+                + "FROM Viestiketju vk\n"
+                + "LEFT JOIN Viesti v ON vk.id = v.viestiketju\n"
+                + "WHERE vk.alue = ?\n"
+                + "GROUP BY vk.id, vk.alue, vk.aihe\n"
+                + "ORDER BY viimeisinLahetysaika DESC"
+                + "LIMIT 10 OFFSET ?;");
+        
+        stmnt.setInt(1, alue.getId());
+        stmnt.setInt(2, offset);
+        
+        ResultSet rs = stmnt.executeQuery();
+        List<Viestiketju> ketjut = new ArrayList();
+
+        while (rs.next()) {
+            ketjut.add(
+                    new Viestiketju(
+                            rs.getInt("id"),
+                            rs.getString("aihe"),
+                            alueDao.findOne(rs.getInt("alue")),
+                            rs.getInt("viestienMaara"),
+                            rs.getTimestamp("viimeisinLahetysaika")
+                    )
+            );
+        }
+
+        rs.close();
+        stmnt.close();
+        connection.close();
+
+        return ketjut;
+    }
+
     public Timestamp findLatestLahetysaika(Alue alue) throws SQLException {
         Connection connection = database.getConnection();
         PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Viestiketju vk, Viesti v ON v.viestiketju = vk.id WHERE vk.alue = ? ORDER BY v.lahetysaika DESC LIMIT 1");
@@ -148,7 +184,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
         stmnt.setInt(2, vk.getAlue().getId());
 
         stmnt.execute();
-        
+
         stmnt.close();
         connection.close();
     }
@@ -164,22 +200,21 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
 
         return maara;
     }
-    
-    public Viestiketju findViimeisin() throws SQLException{
+
+    public Viestiketju findViimeisin() throws SQLException {
         Connection c = database.getConnection();
         PreparedStatement stmnt = c.prepareStatement("SELECT * FROM Viestiketju ORDER BY id DESC LIMIT 1");
-        
+
         ResultSet rs = stmnt.executeQuery();
-        Viestiketju vk = new Viestiketju(rs.getInt("id"), 
-                                rs.getString("aihe"), alueDao.findOne(rs.getInt("alue")));
-        
+        Viestiketju vk = new Viestiketju(rs.getInt("id"),
+                rs.getString("aihe"), alueDao.findOne(rs.getInt("alue")));
+
         rs.close();
         stmnt.close();
         c.close();
-        
+
         return vk;
     }
-    
 
     public void setAlueDao(AlueDao alueDao) {
         this.alueDao = alueDao;

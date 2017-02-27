@@ -15,7 +15,7 @@ public class Database {
     public Connection getConnection() throws SQLException {
         SQLiteConfig sqLiteConfig = new SQLiteConfig();
         Properties properties = sqLiteConfig.toProperties();
-        properties.setProperty(SQLiteConfig.Pragma.DATE_STRING_FORMAT.pragmaName, "yyyy-MM-dd HH:mm");
+        properties.setProperty(SQLiteConfig.Pragma.DATE_STRING_FORMAT.pragmaName, "yyyy-MM-dd HH:mm:ss");
         return DriverManager.getConnection(databaseAddress, properties);
     }
 }

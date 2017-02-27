@@ -41,8 +41,8 @@
         <h2>Lisää uusi viestiketju</h2>
 
         <form method="POST" th:action="@{~/alue/{id}/viestiketju(id=${alueId})}">
-            
-            
+
+
             <b>Nimimerkki:</b>
             <input type="text" name="nimimerkki"/>
             <br></br>
@@ -54,13 +54,23 @@
             <b>Viestin sisältö:</b>
             <textarea id="sisalto" name="sisalto"> </textarea>
             <input type="submit" value="Lisää"/>
-            
+
 
         </form>
 
         <a th:href="@{~/}">Takaisin etusivulle</a>
 
+        <h2>Seuraavalle sivulle -></h2> 
+        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=(${sivunumero}+1))}">
 
+            <input type="submit" value="Seuraava"/>
+        </form>
+        
+        <h2>Edelliselle sivulle -></h2> 
+        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=(${sivunumero}-1))}">
+
+            <input type="submit" value="Edellinen"/>
+        </form>
 
     </body>
 </html>
