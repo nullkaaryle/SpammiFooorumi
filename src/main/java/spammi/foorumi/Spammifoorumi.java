@@ -69,16 +69,17 @@ public class Spammifoorumi {
             data.put("ketjut", vkDao.findNextTen(alueDao.findOne(id), sivunumero*10));
             data.put("alueId", id);
             data.put("alue", alueDao.findOne(id));
-            data.put("sivunumero", 1);
+            data.put("sivunumeroS", sivunumero+1);
+            data.put("sivunumeroE",sivunumero-1);
             
             return new ModelAndView(data, "viestiketjut");
         }, new ThymeleafTemplateEngine());
         
-//        post("/alue/:id/sivu/:sivunumero", (req, res) -> {
-//            
-//            res.redirect("");
-//            return "";
-//        })
+        post("/alue/:id/sivu/:sivunumero", (req, res) -> {
+            
+            res.redirect("/alue/:id/sivu/:sivunumero");
+            return "";
+        });
 
         get("/alue/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));

@@ -61,13 +61,13 @@
         <a th:href="@{~/}">Takaisin etusivulle</a>
 
         <h2>Seuraavalle sivulle -></h2> 
-        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=(${sivunumero}+1))}">
+        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=${sivunumeroS})}">
 
             <input type="submit" value="Seuraava"/>
         </form>
         
         <h2>Edelliselle sivulle -></h2> 
-        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=(${sivunumero}-1))}">
+        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=(${sivunumeroE}))}">
 
             <input type="submit" value="Edellinen"/>
         </form>
