@@ -26,10 +26,7 @@ public class Spammifoorumi {
         this.vkDao = new ViestiketjuDao(database);
         this.alueDao = new AlueDao(database);
         this.viestiDao = new ViestiDao(database);
-        vkDao.setAlueDao(alueDao);
-        vkDao.setViestiDao(viestiDao);
-        viestiDao.setVkDao(vkDao);
-        alueDao.setVkDao(vkDao);
+        setDaot();
         this.sivunumero = 0;
     }
 
@@ -67,7 +64,6 @@ public class Spammifoorumi {
             
             HashMap<String, Object> data = new HashMap();
             data.put("ketjut", vkDao.findNextTen(alueDao.findOne(id), sivunumero*10));
-            data.put("alueId", id);
             data.put("alue", alueDao.findOne(id));
             data.put("sivunumeroS", sivunumero+1);
             data.put("sivunumeroE",sivunumero-1);
@@ -86,7 +82,6 @@ public class Spammifoorumi {
 
             HashMap<String, Object> data = new HashMap();
             data.put("ketjut", vkDao.findByAlue(alueDao.findOne(id)));
-            data.put("alueId", id);
             data.put("alue", alueDao.findOne(id)); //lisäsin tän, koska otsikkoon tarvii alueen nimen
 
             return new ModelAndView(data, "viestiketjut");
@@ -122,8 +117,6 @@ public class Spammifoorumi {
 
             HashMap<String, Object> data = new HashMap();
             data.put("viestit", viestiDao.findByViestiketju(vkDao.findOne(viestiketjuId)));
-            data.put("alueId", alueId);
-            data.put("viestiketjuId", viestiketjuId);
             data.put("alue", alueDao.findOne(alueId));
             data.put("viestiketju", vkDao.findOne(viestiketjuId));
 
@@ -150,5 +143,12 @@ public class Spammifoorumi {
             return "";
         });
 
+    }
+    
+    private void setDaot(){
+        vkDao.setAlueDao(alueDao);
+        vkDao.setViestiDao(viestiDao);
+        viestiDao.setVkDao(vkDao);
+        alueDao.setVkDao(vkDao);
     }
 }

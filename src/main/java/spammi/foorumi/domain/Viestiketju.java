@@ -2,6 +2,7 @@
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -12,14 +13,22 @@ public class Viestiketju {
     private String aihe;
     private Alue alue;
     private int viestimaara;
-    private Timestamp viimeisinViesti;
+    private String viimeisin;
 
     public Viestiketju(int id, String aihe, Alue alue, int viestimaara, Timestamp viimeisinViesti) {
         this.id = id;
         this.aihe = aihe;
         this.alue = alue;
         this.viestimaara = viestimaara;
-        this.viimeisinViesti = viimeisinViesti;
+        setViimeisin(viimeisinViesti);
+    }
+
+    private void setViimeisin(Timestamp aika) {
+         if (aika == null){
+            this.viimeisin = " ";
+        } else {
+            this.viimeisin = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(aika);
+        }
     }
 
     public Viestiketju(String aihe, Alue alue) {
@@ -50,17 +59,19 @@ public class Viestiketju {
         return this.aihe;
     }
     
-    public void setvMaara(int vMaara) {
-        this.viestimaara = vMaara;
-    }
+//    public void setvMaara(int vMaara) {
+//        this.viestimaara = vMaara;
+//    }
 
     public int getvMaara() {
         return viestimaara;
     }
 
-    public Timestamp getViimeisinViesti() {
-        return viimeisinViesti;
+    public String getViimeisin() {
+        return viimeisin;
     }
+    
+    
     
     
     

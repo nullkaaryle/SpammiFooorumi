@@ -49,7 +49,7 @@
 
         <h3>Lisää uusi viesti</h3>
 
-        <form method="POST" th:action="@{~/alue/{alueid}/viestiketju/{viestiketjuid}(alueid=${alueId},viestiketjuid=${viestiketjuId})}"> 
+        <form method="POST" th:action="@{~/alue/{alueid}/viestiketju/{viestiketjuid}(alueid=${alue.id},viestiketjuid=${viestiketju.id})}"> 
 
             <span>Nimimerkki:</span>
             <input type="text" name="nimimerkki"/>

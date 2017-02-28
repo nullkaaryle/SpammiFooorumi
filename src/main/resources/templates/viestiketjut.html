@@ -31,7 +31,7 @@
                 </td>
 
                 <td
-                    th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.getViimeisinViesti()}">
+                    th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.getViimeisin()}">
                 </td>
 
             </tr>
@@ -40,7 +40,7 @@
 
         <h2>Lisää uusi viestiketju</h2>
 
-        <form method="POST" th:action="@{~/alue/{id}/viestiketju(id=${alueId})}">
+        <form method="POST" th:action="@{~/alue/{id}/viestiketju(id=${alue.id})}">
 
 
             <b>Nimimerkki:</b>

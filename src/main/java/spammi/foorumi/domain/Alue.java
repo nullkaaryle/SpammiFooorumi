@@ -1,4 +1,3 @@
-
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
@@ -9,10 +8,11 @@ import java.text.SimpleDateFormat;
  * @author mari
  */
 public class Alue {
+
     private int id;
     private String otsikko;
     private int vkMaara;
-    private Timestamp viimeisinViesti;
+    private String viimeisin;
 
     public Alue(int id, String otsikko) {
         this.id = id;
@@ -24,7 +24,6 @@ public class Alue {
         this.otsikko = otsikko;
         this.vkMaara = 0;
     }
-    
 
     public int getId() {
         return id;
@@ -44,19 +43,20 @@ public class Alue {
     }
 
     public void setViimeisinViesti(Timestamp viimeisinViesti) {
-        this.viimeisinViesti = viimeisinViesti;
+        if (viimeisinViesti == null){
+            this.viimeisin = " ";
+        } else {
+            this.viimeisin = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(viimeisinViesti);
+        }
+
     }
 
     public int getVkMaara() {
         return vkMaara;
     }
 
-    public Timestamp getViimeisinViesti() {
-        //return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.viimeisinViesti);
-        return this.viimeisinViesti;
+    public String getViimeisin() {
+        return viimeisin;
     }
-    
-    
-    
-    
+
 }
