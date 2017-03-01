@@ -4,6 +4,13 @@
 
     <head>
         <title>SpammiFoorumi</title>
+        <style>
+            #sivunvaihto {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                width: 400px;
+            }
+        </style>
     </head>
 
     <body>
@@ -49,21 +56,42 @@
 
         <h3>Lisää uusi viesti</h3>
 
-        <form method="POST" th:action="@{~/alue/{alueid}/viestiketju/{viestiketjuid}(alueid=${alue.id},viestiketjuid=${viestiketju.id})}"> 
+        <form method="POST" th:action="@{~/alue/{alueid}/viestiketju/{viestiketjuid}/sivu/{sivunumero}/viesti(alueid=${alue.id},viestiketjuid=${viestiketju.id},sivunumero=${sivunumero})}"> 
 
-            <span>Nimimerkki:</span>
+            <b>Nimimerkki:</b>
             <input type="text" name="nimimerkki"/>
-
-            <span>Viestin sisältö:</span>
+            <br></br>
+            <br></br>
+            <b>Viestin sisältö:</b>
 
             <textarea id="sisalto" name="sisalto"> </textarea>
-
+            
 
             <input type="submit" value="Lisää"/>
+            <br></br>
+            <br></br>
 
         </form> 
 
-        <a th:href="@{~/}">Takaisin etusivulle</a>
+        <div id="sivunvaihto">
+
+            <div style="float: left; width: 130px"> 
+                <form method="POST" th:action="@{~/alue/{alueId}/viestiketju/{viestiketjuId}/edellinen(alueId=${alue.id}, viestiketjuId=${viestiketju.id})}">
+                    <input type="submit" value=" ← Edelliselle sivulle"/>
+                </form>
+            </div>
+
+            <div style="float: right; width: 225px"> 
+                <form  method="POST" th:action="@{~/alue/{alueId}/viestiketju/{viestiketjuId}/seuraava(alueId=${alue.id}, viestiketjuId=${viestiketju.id})}">
+                    <input type="submit" value="Seuraavalle sivulle → "/>
+                </form>
+                
+            </div>
+
+        </div>
+        <div>
+            <a th:href="@{~/}">Takaisin etusivulle</a>
+        </div>
 
     </body>
 

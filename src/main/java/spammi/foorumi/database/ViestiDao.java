@@ -111,5 +111,40 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     public void setVkDao(ViestiketjuDao vkDao) {
         this.vkDao = vkDao;
     }
+    
+    // löytää jostain syystä vain yhden vietin?
+    public List<Viesti> findNextTen(Viestiketju vk, int offset) throws SQLException { 
+        Connection connection = database.getConnection();
+        PreparedStatement stmnt = connection.prepareStatement(
+                "SELECT viesti.id, viesti.nimimerkki, viesti.viestiketju, viesti.lahetysaika, viesti.sisalto\n"
+                + "FROM Viesti\n"
+                + "WHERE viesti.viestiketju = ?\n"
+//                + "ORDER BY viimeisinLahetysaika DESC\n"
+                + "LIMIT 10 OFFSET ?");
+
+        stmnt.setInt(1, vk.getId());
+        stmnt.setInt(2, offset);
+
+        ResultSet rs = stmnt.executeQuery();
+        List<Viesti> viestit = new ArrayList();
+
+        while (rs.next()) {
+            viestit.add(
+                    new Viesti(
+                            rs.getInt("id"),
+                            rs.getString("nimimerkki"),
+                            vkDao.findOne(rs.getInt("viestiketju")),
+                            rs.getTimestamp("lahetysaika"),
+                            rs.getString("sisalto")
+                    )
+            );
+        }
+
+        rs.close();
+        stmnt.close();
+        connection.close();
+
+        return viestit;
+    }
 
 }

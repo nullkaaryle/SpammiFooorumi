@@ -36,7 +36,7 @@
             <tr th:each="ketju: ${ketjut}">
 
                 <td>   
-                    <a th:href="@{~/alue/{alueId}/viestiketju/{viestiketjuId}(alueId=${ketju.alue.id},viestiketjuId=${ketju.id})}" th:text="${ketju.aihe}"></a>
+                    <a th:href="@{~/alue/{alueId}/viestiketju/{viestiketjuId}/sivu/{sivunumero}(alueId=${ketju.alue.id},viestiketjuId=${ketju.id},sivunumero=1)}" th:text="${ketju.aihe}"></a>
                 </td>
 
                 <td 
@@ -67,8 +67,8 @@
             <b>Viestin sisältö:</b>
             <textarea id="sisalto" name="sisalto"> </textarea>
             <input type="submit" value="Lisää"/>
-
-
+            
+            
         </form>
         
 
@@ -84,6 +84,8 @@
                 <form  method="POST" th:action="@{~/alue/{alueId}/seuraava(alueId=${alue.id})}">
                     <input type="submit" value="Seuraavalle sivulle → "/>
                 </form>
+                <br></br>
+                <br></br>
             </div>
 
         </div>
