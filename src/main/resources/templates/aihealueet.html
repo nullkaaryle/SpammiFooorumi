@@ -29,7 +29,7 @@
             <tr th:each="alue: ${alueet}">
 
                 <td>   
-                    <a th:href="@{~/alue/{id}(id=${alue.id})}" th:text="${alue.otsikko}"></a>
+                    <a th:href="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id},sivunumero=1)}" th:text="${alue.otsikko}"></a>
                 </td>
 
                 <td>

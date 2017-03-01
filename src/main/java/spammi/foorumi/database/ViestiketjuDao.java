@@ -124,7 +124,7 @@ public class ViestiketjuDao implements Dao<Viestiketju, Integer> {
                 + "LEFT JOIN Viesti v ON vk.id = v.viestiketju\n"
                 + "WHERE vk.alue = ?\n"
                 + "GROUP BY vk.id, vk.alue, vk.aihe\n"
-                + "ORDER BY viimeisinLahetysaika DESC"
+                + "ORDER BY viimeisinLahetysaika DESC\n"
                 + "LIMIT 10 OFFSET ?");
 
         stmnt.setInt(1, alue.getId());

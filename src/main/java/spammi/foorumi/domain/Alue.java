@@ -12,11 +12,13 @@ public class Alue {
     private String otsikko;
     private int vMaara;
     private String viimeisin;
+    private int viestiketjujenMaara;
 
-    public Alue(int id, String otsikko) {
+    public Alue(int id, String otsikko, int viestiketjujenMaara) {
         this.id = id;
         this.otsikko = otsikko;
         this.vMaara = 0;
+        this.viestiketjujenMaara = viestiketjujenMaara;
     }
 
     public Alue(String otsikko) {
@@ -57,5 +59,11 @@ public class Alue {
     public String getViimeisin() {
         return viimeisin;
     }
+
+    public int getVkMaara() {
+        return viestiketjujenMaara;
+    }
+    
+    
 
 }

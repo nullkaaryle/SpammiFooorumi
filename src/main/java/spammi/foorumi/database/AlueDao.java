@@ -20,7 +20,7 @@ public class AlueDao implements Dao<Alue, Integer> {
     @Override
     public Alue findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Alue WHERE id = ?");
+        PreparedStatement stmnt = connection.prepareStatement("SELECT a.id, a.otsikko, COUNT(vk.id) AS viestiketjujenMaara FROM Alue a LEFT JOIN Viestiketju vk ON a.id = vk.alue WHERE a.id = ? GROUP BY a.id");
 
         stmnt.setInt(1, key);
         ResultSet rs = stmnt.executeQuery();
@@ -30,7 +30,10 @@ public class AlueDao implements Dao<Alue, Integer> {
             return null;
         }
         
-        Alue alue = new Alue(rs.getInt("id"), rs.getString("otsikko"));
+        Alue alue = new Alue(
+                rs.getInt("id"), 
+                rs.getString("otsikko"),
+                rs.getInt("viestiketjujenMaara"));
         
         rs.close();
         stmnt.close();
@@ -42,13 +45,17 @@ public class AlueDao implements Dao<Alue, Integer> {
     @Override
     public List<Alue> findAll() throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM Alue ORDER BY otsikko");
+        PreparedStatement stmnt = connection.prepareStatement("SELECT a.id, a.otsikko, COUNT(vk.id) AS viestiketjujenMaara FROM Alue a LEFT JOIN Viestiketju vk ON a.id = vk.alue GROUP BY a.id ORDER BY otsikko");
 
         ResultSet rs = stmnt.executeQuery();
         List<Alue> alueet = new ArrayList();
 
         while (rs.next()) {
-            Alue alue = new Alue(rs.getInt("id"), rs.getString("otsikko"));
+            Alue alue = new Alue(
+                rs.getInt("id"), 
+                rs.getString("otsikko"),
+                rs.getInt("viestiketjujenMaara"));
+            
             alue.setVkMaara(vkDao.countKetjujenViestit(alue));
             alue.setViimeisinViesti(vkDao.findLatestLahetysaika(alue));
             alueet.add(alue);

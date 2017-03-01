@@ -3,7 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>SpammiFoorumi</title>
-
+        <style>
+            #sivunvaihto {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                width: 400px;
+            }
+        </style>
     </head>
     <body>
 
@@ -64,25 +70,26 @@
 
 
         </form>
+        
 
-
-        <div style="width:400px;">
+        <div id="sivunvaihto">
 
             <div style="float: left; width: 130px"> 
-                <form method="GET" th:action="@{~/alue/{alueId}/sivu/{sivunumero}(alueId=${alue.id}, sivunumero=(${sivunumeroE}))}">
+                <form method="POST" th:action="@{~/alue/{alueId}/edellinen(alueId=${alue.id})}">
                     <input type="submit" value=" ← Edelliselle sivulle"/>
                 </form>
             </div>
 
             <div style="float: right; width: 225px"> 
-                <form  method="GET" th:action="@{~/alue/{alueId}/sivu/{sivunumero}(alueId=${alue.id}, sivunumero=${sivunumeroS})}">
+                <form  method="POST" th:action="@{~/alue/{alueId}/seuraava(alueId=${alue.id})}">
                     <input type="submit" value="Seuraavalle sivulle → "/>
                 </form>
             </div>
 
         </div>
-
-        <a th:href="@{~/}">Takaisin etusivulle</a>
+        <div>
+            <a th:href="@{~/}">Takaisin etusivulle</a>
+        </div>
     </body>
 </html>
 
