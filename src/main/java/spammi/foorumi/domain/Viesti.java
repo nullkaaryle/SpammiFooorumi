@@ -3,12 +3,11 @@ package spammi.foorumi.domain;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-
 /**
- *
- * @author mari
+ * @author mari, ninna, pinni
  */
 public class Viesti {
+
     private int id;
     private String nimimerkki;
     private Viestiketju viestiketju;
@@ -33,7 +32,6 @@ public class Viesti {
         return id;
     }
 
-
     public String getLahetysaika() {
         return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.lahetysaika);
     }
@@ -49,12 +47,10 @@ public class Viesti {
     public Viestiketju getViestiketju() {
         return viestiketju;
     }
-    
+
     @Override
     public String toString() {
-        return this.nimimerkki +" kirjoitti: \n" + this.sisalto +"\n"+ this.lahetysaika;
+        return this.nimimerkki + " kirjoitti: \n" + this.sisalto + "\n" + this.lahetysaika;
     }
-    
-    
-    
+
 }

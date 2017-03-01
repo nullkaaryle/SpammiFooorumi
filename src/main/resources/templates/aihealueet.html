@@ -11,27 +11,35 @@
 
         <table>
             <tr>
-                <th><i>Alue</i></th>
-                <th><i>Viestejä yhteensä</i></th>
-                <th><i>Viimeisin viesti</i></th>
+
+                <th>
+                    <div align="left"> <i>Alue</i> </div>
+                </th>
+
+                <th>
+                    <div align="left"><i>Viestejä yhteensä</i></div>
+                </th>
+
+                <th>
+                    <div align="left"><i>Viimeisin viesti</i></div>
+                </th>
+
             </tr>
 
             <tr th:each="alue: ${alueet}">
+
                 <td>   
                     <a th:href="@{~/alue/{id}(id=${alue.id})}" th:text="${alue.otsikko}"></a>
                 </td>
 
                 <td>
-
-                    <span th:text="${alue.vkMaara}"></span>
+                    <div align="center"><span th:text="${alue.vMaara}"></span></div>
                 </td>
 
                 <td>
 
                     <span th:text="${alue.viimeisin}"></span>
                 </td>
-
-
 
             </tr>
 
@@ -45,7 +53,7 @@
             <input type="text" name="alue"/>
             <input type="submit" value="Lisää"/>
         </form>
-        
+
 
     </body>
 </html>

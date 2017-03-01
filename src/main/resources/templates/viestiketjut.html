@@ -12,12 +12,19 @@
         <table>
 
             <tr>
+
                 <th>
-                    <i>Alue: <span th:text="${alue.otsikko}"></span></i>
+                    <div align="left"><i>Alue: <span th:text="${alue.otsikko}"></span></i></div>
                 </th>
 
-                <th><i>Viestejä</i></th>
-                <th><i>Viimeisin viesti</i></th>
+                <th>
+                    <div align="left"><i>Viestejä</i></div>
+                </th>
+
+                <th>
+                    <div align="left"><i>Viimeisin viesti</i></div>
+                </th>
+
             </tr>
 
             <tr th:each="ketju: ${ketjut}">
@@ -27,7 +34,7 @@
                 </td>
 
                 <td 
-                    th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.getvMaara()}">
+                    align="center" th:href="@{~/alue/{AlueId}(AlueId=${ketju.alue.id})}" th:text="${ketju.getvMaara()}">
                 </td>
 
                 <td
@@ -40,7 +47,7 @@
 
         <h2>Lisää uusi viestiketju</h2>
 
-        <form method="POST" th:action="@{~/alue/{id}/viestiketju(id=${alue.id})}">
+        <form method="POST" th:action="@{~/alue/{alueId}/viestiketju(alueId=${alue.id})}">
 
 
             <b>Nimimerkki:</b>
@@ -58,19 +65,24 @@
 
         </form>
 
+
+        <div style="width:400px;">
+
+            <div style="float: left; width: 130px"> 
+                <form method="GET" th:action="@{~/alue/{alueId}/sivu/{sivunumero}(alueId=${alue.id}, sivunumero=(${sivunumeroE}))}">
+                    <input type="submit" value=" ← Edelliselle sivulle"/>
+                </form>
+            </div>
+
+            <div style="float: right; width: 225px"> 
+                <form  method="GET" th:action="@{~/alue/{alueId}/sivu/{sivunumero}(alueId=${alue.id}, sivunumero=${sivunumeroS})}">
+                    <input type="submit" value="Seuraavalle sivulle → "/>
+                </form>
+            </div>
+
+        </div>
+
         <a th:href="@{~/}">Takaisin etusivulle</a>
-
-        <h2>Seuraavalle sivulle -></h2> 
-        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=${sivunumeroS})}">
-
-            <input type="submit" value="Seuraava"/>
-        </form>
-        
-        <h2>Edelliselle sivulle -></h2> 
-        <form method="GET" th:action="@{~/alue/{id}/sivu/{sivunumero}(id=${alue.id}, sivunumero=(${sivunumeroE}))}">
-
-            <input type="submit" value="Edellinen"/>
-        </form>
-
     </body>
 </html>
+

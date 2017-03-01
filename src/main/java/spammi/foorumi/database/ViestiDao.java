@@ -6,8 +6,7 @@ import java.util.*;
 import spammi.foorumi.domain.*;
 
 /**
- *
- * @author mari
+ * @author mari, ninna, pinni
  */
 public class ViestiDao implements Dao<Viesti, Integer> {
 

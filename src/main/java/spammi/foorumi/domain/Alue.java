@@ -4,25 +4,24 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 /**
- *
- * @author mari
+ * @author mari, ninna, pinni
  */
 public class Alue {
 
     private int id;
     private String otsikko;
-    private int vkMaara;
+    private int vMaara;
     private String viimeisin;
 
     public Alue(int id, String otsikko) {
         this.id = id;
         this.otsikko = otsikko;
-        this.vkMaara = 0;
+        this.vMaara = 0;
     }
 
     public Alue(String otsikko) {
         this.otsikko = otsikko;
-        this.vkMaara = 0;
+        this.vMaara = 0;
     }
 
     public int getId() {
@@ -39,7 +38,7 @@ public class Alue {
     }
 
     public void setVkMaara(int vkMaara) {
-        this.vkMaara = vkMaara;
+        this.vMaara = vkMaara;
     }
 
     public void setViimeisinViesti(Timestamp viimeisinViesti) {
@@ -51,8 +50,8 @@ public class Alue {
 
     }
 
-    public int getVkMaara() {
-        return vkMaara;
+    public int getVMaara() {
+        return vMaara;
     }
 
     public String getViimeisin() {

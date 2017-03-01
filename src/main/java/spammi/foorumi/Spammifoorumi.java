@@ -10,8 +10,7 @@ import static spark.Spark.post;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 /**
- *
- * @author mari
+ * @author mari, ninna, pinni
  */
 public class Spammifoorumi {
 
@@ -31,12 +30,13 @@ public class Spammifoorumi {
     }
 
     public void kaynnista() {
-        
+
         if (System.getenv("PORT") != null) {
             port(Integer.valueOf(System.getenv("PORT")));
         }
-        
 
+//ALUE        
+        //JUURIPOLKU, NÄYTTÄÄ KAIKKI TIETOKANNASSA OLEVAT ALUEET
         get("/", (req, res) -> {
             HashMap<String, Object> data = new HashMap();
             data.put("alueet", alueDao.findAll());
@@ -44,6 +44,9 @@ public class Spammifoorumi {
             return new ModelAndView(data, "aihealueet");
         }, new ThymeleafTemplateEngine());
 
+        //LUO TIETOKANTAAN UUDEN ALUEEN
+        //UUDEN ALUEEN NIMI TULEE PYYNNÖN PARAMETRINA NIMELTÄ "alue"
+        //UUDELLEENOHJAA JUURIPOLKUUN
         post("/alue", (req, res) -> {
 
             if (!req.queryParams("alue").isEmpty()) {
@@ -54,38 +57,42 @@ public class Spammifoorumi {
             res.redirect("/");
             return "";
         });
+
+//TIETYN ALUEEN VIESTIKETJUT        
+        
+        //NÄYTTÄÄ KAIKKI :alueId-TUNNUKSELLA MERKITYN ALUEEN VIESTIKETJUT
+        get("/alue/:alueId", (req, res) -> {
+            int alueId = Integer.parseInt(req.params(":alueId"));
+
+            HashMap<String, Object> data = new HashMap();
+            data.put("ketjut", vkDao.findByAlue(alueDao.findOne(alueId)));
+            data.put("alue", alueDao.findOne(alueId)); //lisäsin tän, koska otsikkoon tarvii alueen nimen
+
+            return new ModelAndView(data, "viestiketjut");
+        }, new ThymeleafTemplateEngine());
         
         get("/alue/:id/sivu/:sivunumero", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
             sivunumero = Integer.parseInt(req.params(":sivunumero"));
-            if (sivunumero < 0 || req.params(":sivunumero").isEmpty()){
+           
+            if (sivunumero < 0 || req.params(":sivunumero").isEmpty()) {
                 sivunumero = 0;
             }
-            
+
             HashMap<String, Object> data = new HashMap();
-            data.put("ketjut", vkDao.findNextTen(alueDao.findOne(id), sivunumero*10));
+            data.put("ketjut", vkDao.findNextTen(alueDao.findOne(id), sivunumero * 10));
             data.put("alue", alueDao.findOne(id));
-            data.put("sivunumeroS", sivunumero+1);
-            data.put("sivunumeroE",sivunumero-1);
-            
+            data.put("sivunumeroS", sivunumero + 1);
+            data.put("sivunumeroE", sivunumero - 1);
+
             return new ModelAndView(data, "viestiketjut");
         }, new ThymeleafTemplateEngine());
         
         post("/alue/:id/sivu/:sivunumero", (req, res) -> {
-            
+
             res.redirect("/alue/:id/sivu/:sivunumero");
             return "";
         });
-
-        get("/alue/:id", (req, res) -> {
-            int id = Integer.parseInt(req.params(":id"));
-
-            HashMap<String, Object> data = new HashMap();
-            data.put("ketjut", vkDao.findByAlue(alueDao.findOne(id)));
-            data.put("alue", alueDao.findOne(id)); //lisäsin tän, koska otsikkoon tarvii alueen nimen
-
-            return new ModelAndView(data, "viestiketjut");
-        }, new ThymeleafTemplateEngine());
 
         post("/alue/:id/viestiketju", (req, res) -> {  //ei toimi,ei löydä viestiketjun Id:tä ja kommentoitu id on musta aika mahoton
             int id = Integer.parseInt(req.params(":id"));
@@ -100,7 +107,7 @@ public class Spammifoorumi {
                 if (nimimerkki.isEmpty()) {
                     nimimerkki = "Anonyymi";
                 }
-                
+
                 Viestiketju vk = vkDao.findViimeisin();
                 Viesti viesti = new Viesti(nimimerkki, vk, sisalto);
                 viestiDao.create(viesti);
@@ -111,6 +118,11 @@ public class Spammifoorumi {
             return "";
         });
 
+        
+//TIETYN ALUEEN TIETYN VIESTIKETJUN VIESTIT
+        
+        //NÄYTTÄÄ KAIKKI :alueId-TUNNUKSELLA MERKITYN ALUEEN
+        //:viestiketjuId-TUNNUKSELLA MERKITYT VIESTIKETJUN VIESTIT
         get("/alue/:alueId/viestiketju/:viestiketjuId", (req, res) -> {
             int alueId = Integer.parseInt(req.params(":alueId"));
             int viestiketjuId = Integer.parseInt(req.params(":viestiketjuId"));
@@ -123,6 +135,9 @@ public class Spammifoorumi {
             return new ModelAndView(data, "viestit");
         }, new ThymeleafTemplateEngine());
 
+        //LUO TIETOKANTAAN UUDEN VIESTIN
+        //:alueId-MERKITYN ALUEEN :viestiketjuId-MERKITTYYN VIESTIKETJUUN
+        //UUDELLEENOHJAA KYS. VIESTIKETJUN SIVULLE
         post("alue/:alueId/viestiketju/:viestiketjuId", (req, res) -> {
             String nimimerkki = req.queryParams("nimimerkki").trim();
             String sisalto = req.queryParams("sisalto").trim();
@@ -144,8 +159,8 @@ public class Spammifoorumi {
         });
 
     }
-    
-    private void setDaot(){
+
+    private void setDaot() {
         vkDao.setAlueDao(alueDao);
         vkDao.setViestiDao(viestiDao);
         viestiDao.setVkDao(vkDao);

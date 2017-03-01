@@ -6,8 +6,7 @@ import java.util.List;
 import spammi.foorumi.domain.Alue;
 
 /**
- *
- * @author mari
+ * @author mari, ninna, pinni
  */
 public class AlueDao implements Dao<Alue, Integer> {
 

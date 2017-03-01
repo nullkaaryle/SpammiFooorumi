@@ -1,14 +1,13 @@
-
 package spammi.foorumi.domain;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 /**
- *
- * @author mari
+ * @author mari, ninna, pinni
  */
 public class Viestiketju {
+
     private int id;
     private String aihe;
     private Alue alue;
@@ -24,7 +23,7 @@ public class Viestiketju {
     }
 
     private void setViimeisin(Timestamp aika) {
-         if (aika == null){
+        if (aika == null) {
             this.viimeisin = " ";
         } else {
             this.viimeisin = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(aika);
@@ -35,8 +34,8 @@ public class Viestiketju {
         this.aihe = aihe;
         this.alue = alue;
     }
-    
-    public Viestiketju(int id, String aihe, Alue alue){
+
+    public Viestiketju(int id, String aihe, Alue alue) {
         this.id = id;
         this.aihe = aihe;
         this.alue = alue;
@@ -58,11 +57,10 @@ public class Viestiketju {
     public String toString() {
         return this.aihe;
     }
-    
+
 //    public void setvMaara(int vMaara) {
 //        this.viestimaara = vMaara;
 //    }
-
     public int getvMaara() {
         return viestimaara;
     }
@@ -70,9 +68,5 @@ public class Viestiketju {
     public String getViimeisin() {
         return viimeisin;
     }
-    
-    
-    
-    
-    
+
 }

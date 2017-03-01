@@ -6,8 +6,7 @@ import spammi.foorumi.database.*;
 import spammi.foorumi.domain.*;
 
 /**
- *
- * @author mari
+ * @author mari, ninna, pinni
  */
 public class TestiKayttis {
 
@@ -97,8 +96,8 @@ public class TestiKayttis {
             System.out.println("* * * * * * * *\n");
         }
     }
-    
-    public void naytaViimeisinLahetysaika() throws SQLException{
+
+    public void naytaViimeisinLahetysaika() throws SQLException {
         System.out.println(vkDao.findLatestLahetysaika(alueDao.findOne(1)));
     }
 
