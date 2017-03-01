@@ -119,7 +119,6 @@ public class ViestiDao implements Dao<Viesti, Integer> {
                 "SELECT viesti.id, viesti.nimimerkki, viesti.viestiketju, viesti.lahetysaika, viesti.sisalto\n"
                 + "FROM Viesti\n"
                 + "WHERE viesti.viestiketju = ?\n"
-//                + "ORDER BY viimeisinLahetysaika DESC\n"
                 + "LIMIT 10 OFFSET ?");
 
         stmnt.setInt(1, vk.getId());
