@@ -100,14 +100,13 @@ public class Spammifoorumi {
             int viestiketjujenMaara = alue.getVkMaara();
             double tarvittavaSivumaara = Math.ceil(viestiketjujenMaara / 10);
 
-            if(viestiketjujenMaara%10 >=1){  //en ehtiny testaamaa toimiiko
-                tarvittavaSivumaara ++;
+            if (viestiketjujenMaara % 10 >= 1) {  //en ehtiny testaamaa toimiiko
+                tarvittavaSivumaara++;
             }
-            
+
             if (this.alueenSisainenSivunumero < tarvittavaSivumaara) {
                 this.alueenSisainenSivunumero++;
             }
-            
 
             res.redirect("/alue/" + alueId + "/sivu/" + this.alueenSisainenSivunumero);
             return "";
@@ -143,12 +142,11 @@ public class Spammifoorumi {
                 viestiDao.create(uusiViesti);
             }
 
-            res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId+"/sivu/1");
+            res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId + "/sivu/1");
             return "";
         });
 
 //TIETYN ALUEEN TIETYN VIESTIKETJUN VIESTIT
-
         //NÄYTTÄÄ KAIKKI :alueId-TUNNUKSELLA MERKITYN ALUEEN
         //:viestiketjuId-TUNNUKSELLA MERKITYT VIESTIKETJUN VIESTIT 
         get("/alue/:alueId/viestiketju/:viestiketjuId/sivu/:sivunumero", (req, res) -> {
@@ -193,9 +191,9 @@ public class Spammifoorumi {
             Viestiketju viestiketju = vkDao.findOne(vkId);
             int viestienMaara = viestiketju.getvMaara();
             double tarvittavaSivumaara = Math.ceil(viestienMaara / 10);
-            
-            if(viestienMaara%10 >=1){
-                tarvittavaSivumaara ++;
+
+            if (viestienMaara % 10 >= 1) {
+                tarvittavaSivumaara++;
             }
 
             if (this.ketjunSisainenSivunumero < tarvittavaSivumaara) {
@@ -220,13 +218,18 @@ public class Spammifoorumi {
             if (nimimerkki.isEmpty()) {
                 nimimerkki = "Anonyymi";
             }
-
+            Viestiketju ketju = vkDao.findOne(viestiketjuId);
+            
             if (!sisalto.isEmpty()) {
-                Viesti viesti = new Viesti(nimimerkki, vkDao.findOne(viestiketjuId), sisalto);
+                Viesti viesti = new Viesti(nimimerkki, ketju, sisalto);
                 viestiDao.create(viesti);
             }
 
-            res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId+ "/sivu/"+sivunumero);
+            if ((double)viestiDao.countViestit(ketju) / sivunumero > 10.0) {
+                res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId + "/sivu/" + (sivunumero + 1));
+            } else {
+                res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId + "/sivu/" + sivunumero);
+            }
             return "";
         });
 
