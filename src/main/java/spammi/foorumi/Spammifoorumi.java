@@ -219,17 +219,23 @@ public class Spammifoorumi {
                 nimimerkki = "Anonyymi";
             }
             Viestiketju ketju = vkDao.findOne(viestiketjuId);
-            
+
             if (!sisalto.isEmpty()) {
                 Viesti viesti = new Viesti(nimimerkki, ketju, sisalto);
                 viestiDao.create(viesti);
             }
+            
+            int tarvittavaSivumaara = (int) Math.ceil(viestiDao.countViestit(ketju) / 10);
 
-            if ((double)viestiDao.countViestit(ketju) / sivunumero > 10.0) {
-                res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId + "/sivu/" + (sivunumero + 1));
+            if (sivunumero < tarvittavaSivumaara) {
+                sivunumero = tarvittavaSivumaara + 1;
+            } else if (tarvittavaSivumaara == 0) {
+                sivunumero = 1;
             } else {
-                res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId + "/sivu/" + sivunumero);
+                sivunumero = tarvittavaSivumaara;
             }
+            
+            res.redirect("/alue/" + alueId + "/viestiketju/" + viestiketjuId + "/sivu/" + sivunumero);
             return "";
         });
 
