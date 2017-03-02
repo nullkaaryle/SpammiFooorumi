@@ -66,10 +66,8 @@ public class Spammifoorumi {
         //NÄYTTÄÄ :alueId-TUNNISTEELLA MERKITYN ALUEEN VIESTIKETJUT
         //JOISTA ON VALITTU NÄYTETTÄVÄKSI TIETYT 10 KETJUA :sivunumero-TUNNISTEEN AVULLA 
         get("/alue/:alueId/sivu/:sivunumero", (req, res) -> {
-            this.ketjunSisainenSivunumero = 1;
             int alueId = Integer.parseInt(req.params(":alueId"));
 
-            int sivunro = Integer.parseInt(req.params(":sivunumero"));
             this.offset = (alueenSisainenSivunumero - 1) * 10;
 
             HashMap<String, Object> data = new HashMap();
@@ -157,6 +155,7 @@ public class Spammifoorumi {
             int alueId = Integer.parseInt(req.params(":alueId"));
             int viestiketjuId = Integer.parseInt(req.params(":viestiketjuId"));
             int sivunumero = Integer.parseInt(req.params(":sivunumero"));
+            this.ketjunSisainenSivunumero = sivunumero;
             this.offset = (ketjunSisainenSivunumero - 1) * 10;
 
             HashMap<String, Object> data = new HashMap();
@@ -180,7 +179,7 @@ public class Spammifoorumi {
                 this.ketjunSisainenSivunumero = 1;
             }
 
-            res.redirect("/alue/" + alueId + "/viestiketju/" + vkId + "/sivu/" + this.alueenSisainenSivunumero);
+            res.redirect("/alue/" + alueId + "/viestiketju/" + vkId + "/sivu/" + this.ketjunSisainenSivunumero);
             return "";
         });
 
