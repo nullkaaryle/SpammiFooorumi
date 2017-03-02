@@ -26,7 +26,7 @@ public class Viestiketju {
         if (aika == null) {
             this.viimeisin = " ";
         } else {
-            this.viimeisin = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(aika);
+            this.viimeisin = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(aika);
         }
     }
 

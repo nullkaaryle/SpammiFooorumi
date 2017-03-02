@@ -18,7 +18,7 @@
 
 
 
-        <div><b><i>Alue: <span th:text="${alue.otsikko}" ></span>
+        <div><b><i>Alue: <a th:href="@{~/alue/{alueId}/sivu/{sivunumero}(alueId= ${alue.id},sivunumero=${sivunumero})}" th:text="${alue.otsikko}" ></a>
             -> <span th:text="${viestiketju.aihe}"></span></i></b></div>
 
 
@@ -34,20 +34,22 @@
             <tr th:each="viesti,iter: ${viestit}"> 
 
                 <td>   
-                    (<span th:text="${iter.index + 1}"></span>)
+                    (<span th:text="${((iter.index + 1) + ((sivunumero * 10) - 10))}"></span>)
                 </td>
 
                 <td>   
                     <span th:text="${viesti.sisalto}"></span>
+                </td>
+                
+                <td>   
+                    t. <span th:text="${viesti.nimimerkki}"></span>
                 </td> 
 
                 <td>   
                     <span th:text="${viesti.lahetysaika}"></span>
                 </td> 
 
-                <td>   
-                    t. <span th:text="${viesti.nimimerkki}"></span>
-                </td> 
+                
 
             </tr>
 

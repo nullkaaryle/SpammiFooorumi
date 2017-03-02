@@ -47,7 +47,7 @@ public class Alue {
         if (viimeisinViesti == null){
             this.viimeisin = " ";
         } else {
-            this.viimeisin = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(viimeisinViesti);
+            this.viimeisin = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(viimeisinViesti);
         }
 
     }

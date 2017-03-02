@@ -33,7 +33,7 @@ public class Viesti {
     }
 
     public String getLahetysaika() {
-        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.lahetysaika);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(this.lahetysaika);
     }
 
     public String getNimimerkki() {

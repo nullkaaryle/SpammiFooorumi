@@ -101,12 +101,14 @@ public class Spammifoorumi {
             int viestiketjujenMaara = alue.getVkMaara();
             double tarvittavaSivumaara = Math.ceil(viestiketjujenMaara / 10);
 
-            if (this.alueenSisainenSivunumero < tarvittavaSivumaara) {
-                this.alueenSisainenSivunumero++;
-            }
             if(viestiketjujenMaara%10 >=1){  //en ehtiny testaamaa toimiiko
                 tarvittavaSivumaara ++;
             }
+            
+            if (this.alueenSisainenSivunumero < tarvittavaSivumaara) {
+                this.alueenSisainenSivunumero++;
+            }
+            
 
             res.redirect("/alue/" + alueId + "/sivu/" + this.alueenSisainenSivunumero);
             return "";
@@ -147,19 +149,7 @@ public class Spammifoorumi {
         });
 
 //TIETYN ALUEEN TIETYN VIESTIKETJUN VIESTIT
-//        //NÄYTTÄÄ KAIKKI :alueId-TUNNUKSELLA MERKITYN ALUEEN
-//        //:viestiketjuId-TUNNUKSELLA MERKITYT VIESTIKETJUN VIESTIT     
-//        get("/alue/:alueId/viestiketju/:viestiketjuId", (req, res) -> {
-//            int alueId = Integer.parseInt(req.params(":alueId"));
-//            int viestiketjuId = Integer.parseInt(req.params(":viestiketjuId"));
-//
-//            HashMap<String, Object> data = new HashMap();
-//            data.put("viestit", viestiDao.findByViestiketju(vkDao.findOne(viestiketjuId)));
-//            data.put("alue", alueDao.findOne(alueId));
-//            data.put("viestiketju", vkDao.findOne(viestiketjuId));
-//
-//            return new ModelAndView(data, "viestit");
-//        }, new ThymeleafTemplateEngine());
+
         //NÄYTTÄÄ KAIKKI :alueId-TUNNUKSELLA MERKITYN ALUEEN
         //:viestiketjuId-TUNNUKSELLA MERKITYT VIESTIKETJUN VIESTIT 
         get("/alue/:alueId/viestiketju/:viestiketjuId/sivu/:sivunumero", (req, res) -> {
@@ -170,15 +160,16 @@ public class Spammifoorumi {
 
             HashMap<String, Object> data = new HashMap();
             data.put("viestit", viestiDao.findNextTen(vkDao.findOne(viestiketjuId), offset));
-//            System.out.println("##########################");
-//            System.out.println(viestiDao.findNextTen(vkDao.findOne(viestiketjuId), offset));
-//            System.out.println("#############################");
+
             data.put("alue", alueDao.findOne(alueId));
             data.put("viestiketju", vkDao.findOne(viestiketjuId));
             data.put("sivunumero", sivunumero);
             return new ModelAndView(data, "viestit");
         }, new ThymeleafTemplateEngine());
 
+        //PIENENTÄÄ SIVUNUMEROA YHDELLÄ JA UUDELLEENOHJAA :alueId-TUNNISTEELLA
+        //MERKITYN ALUEEN :viestiketjuId-TUNNISTEEN MERKITTYYN 
+        //VIESTIKETJULISTAUKSEN SEURAAVALLE SIVULLE
         post("/alue/:alueId/viestiketju/:viestiketjuId/edellinen", (req, res) -> {
             int alueId = Integer.parseInt(req.params(":alueId"));
             int vkId = Integer.parseInt(req.params(":viestiketjuId"));
@@ -192,6 +183,9 @@ public class Spammifoorumi {
             return "";
         });
 
+        //SUURENTAA SIVUNUMEROA YHDELLÄ JA UUDELLEENOHJAA :alueId-TUNNISTEELLA
+        //MERKITYN ALUEEN :viestiketjuId-TUNNISTEEN MERKITTYYN 
+        //VIESTIKETJULISTAUKSEN SEURAAVALLE SIVULLE
         post("/alue/:alueId/viestiketju/:viestiketjuId/seuraava", (req, res) -> {
             int alueId = Integer.parseInt(req.params(":alueId"));
             int vkId = Integer.parseInt(req.params(":viestiketjuId"));
@@ -236,52 +230,6 @@ public class Spammifoorumi {
             return "";
         });
 
-//        get("/alue/:id/sivu/:alueenSisainenSivunumero", (req, res) -> {
-//            int id = Integer.parseInt(req.params(":id"));
-//            alueenSisainenSivunumero = Integer.parseInt(req.params(":alueenSisainenSivunumero"));
-//           
-//            if (alueenSisainenSivunumero < 0 || req.params(":alueenSisainenSivunumero").isEmpty()) {
-//                alueenSisainenSivunumero = 0;
-//            }
-//
-//            HashMap<String, Object> data = new HashMap();
-//            data.put("ketjut", vkDao.findNextTen(alueDao.findOne(id), alueenSisainenSivunumero * 10));
-//            data.put("alue", alueDao.findOne(id));
-//            data.put("sivunumeroS", alueenSisainenSivunumero + 1);
-//            data.put("sivunumeroE", alueenSisainenSivunumero - 1);
-//
-//            return new ModelAndView(data, "viestiketjut");
-//        }, new ThymeleafTemplateEngine());
-//        
-//        
-//        post("/alue/:id/sivu/:alueenSisainenSivunumero", (req, res) -> {
-//            res.redirect("/alue/:id/sivu/:alueenSisainenSivunumero");
-//            return "";
-//        });
-//
-//        post("/alue/:id/viestiketju", (req, res) -> {  //ei toimi,ei löydä viestiketjun Id:tä ja kommentoitu id on musta aika mahoton
-//            int id = Integer.parseInt(req.params(":id"));
-////            int viestiketjuId = Integer.parseInt(req.queryParams("viestiketju"));
-//            String nimimerkki = req.queryParams("nimimerkki").trim();
-//            String sisalto = req.queryParams("sisalto").trim();
-//
-//            if (!(req.queryParams("viestiketju").isEmpty() && req.queryParams("sisalto").isEmpty())) {
-//                Viestiketju ketju = new Viestiketju(req.queryParams("viestiketju"), alueDao.findOne(id));
-//                vkDao.create(ketju);
-//
-//                if (nimimerkki.isEmpty()) {
-//                    nimimerkki = "Anonyymi";
-//                }
-//
-//                Viestiketju vk = vkDao.findViimeisin();
-//                Viesti viesti = new Viesti(nimimerkki, vk, sisalto);
-//                viestiDao.create(viesti);
-//
-//                res.redirect("/alue/" + id + "/viestiketju/" + vk.getId());
-//            }
-////            res.redirect("/alue/" + id + "/viestiketju/" + ketju.getId());
-//            return "";
-//        });
     }
 
     private void setDaot() {
