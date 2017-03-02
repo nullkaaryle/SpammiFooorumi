@@ -14,12 +14,19 @@
     </head>
 
     <body>
+
+        <div>
+            <a th:href="@{~/}">Takaisin etusivulle</a>
+        </div>
+
+        <br></br>
+
         <h1>SpämmiFoorumi</h1>
 
 
 
         <div><b><i>Alue: <a th:href="@{~/alue/{alueId}/sivu/{sivunumero}(alueId= ${alue.id},sivunumero=${sivunumero})}" th:text="${alue.otsikko}" ></a>
-            -> <span th:text="${viestiketju.aihe}"></span></i></b></div>
+                    -> <span th:text="${viestiketju.aihe}"></span></i></b></div>
 
 
         <table>
@@ -40,7 +47,7 @@
                 <td>   
                     <span th:text="${viesti.sisalto}"></span>
                 </td>
-                
+
                 <td>   
                     t. <span th:text="${viesti.nimimerkki}"></span>
                 </td> 
@@ -49,7 +56,7 @@
                     <span th:text="${viesti.lahetysaika}"></span>
                 </td> 
 
-                
+
 
             </tr>
 
@@ -67,7 +74,7 @@
             <b>Viestin sisältö:</b>
 
             <textarea id="sisalto" name="sisalto"> </textarea>
-            
+
 
             <input type="submit" value="Lisää"/>
             <br></br>
@@ -87,13 +94,11 @@
                 <form  method="POST" th:action="@{~/alue/{alueId}/viestiketju/{viestiketjuId}/seuraava(alueId=${alue.id}, viestiketjuId=${viestiketju.id})}">
                     <input type="submit" value="Seuraavalle sivulle → "/>
                 </form>
-                
+
             </div>
 
         </div>
-        <div>
-            <a th:href="@{~/}">Takaisin etusivulle</a>
-        </div>
+
 
     </body>
 
