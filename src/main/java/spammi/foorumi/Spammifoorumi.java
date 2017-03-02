@@ -66,6 +66,7 @@ public class Spammifoorumi {
         //NÄYTTÄÄ :alueId-TUNNISTEELLA MERKITYN ALUEEN VIESTIKETJUT
         //JOISTA ON VALITTU NÄYTETTÄVÄKSI TIETYT 10 KETJUA :sivunumero-TUNNISTEEN AVULLA 
         get("/alue/:alueId/sivu/:sivunumero", (req, res) -> {
+            this.ketjunSisainenSivunumero = 1;
             int alueId = Integer.parseInt(req.params(":alueId"));
 
             int sivunro = Integer.parseInt(req.params(":sivunumero"));
