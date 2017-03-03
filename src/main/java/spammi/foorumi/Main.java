@@ -6,7 +6,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Database database = new Database("jdbc:sqlite:spammitestidata.db");
+        Database database = new Database("jdbc:sqlite:testitietokanta.db");
+        database.init();
 
         Spammifoorumi foorumi = new Spammifoorumi(database);
         foorumi.kaynnista();
