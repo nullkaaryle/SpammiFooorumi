@@ -11,12 +11,6 @@
 * [Geffe](https://github.com/Geffe)
 * [nullkaaryle](https://github.com/nullkaaryle)
 
-* * * 
-
-###SpämmiFoorumi- web-sovellus###
-* [Linkki käyttöohjeeseen]()
-* [Linkki SpämmiFoorumiin](http://intense-dusk-21512.herokuapp.com/) (Herokussa)
-
 
 * * *
 
@@ -44,6 +38,13 @@ Spämmi-teemamme mukaisesti keskustelupalstallemme voi lisätä lyhyitä ja napa
 
 * * *
 
+
+###SpämmiFoorumin web-sovellus###
+* [Linkki käyttöohjeeseen](https://github.com/nullkaaryle/SpammiFooorumi/blob/master/dokumentaatio/Kayttoohje.md)
+* [Linkki SpämmiFoorumiin](http://intense-dusk-21512.herokuapp.com/) (Herokussa)
+
+* * *
+
 ####Hyödynnettyjä sovelluksia###
 
 Ryhmämme jäsenet tutustuivat ryhmätyön ja kurssin aikana muun muassa seuraviin työkaluihin:
@@ -55,4 +56,4 @@ Ryhmämme jäsenet tutustuivat ryhmätyön ja kurssin aikana muun muassa seuravi
 * Heroku
 * SourceTree
 * DB Browser for Sqlite
-* Erilaisia kaavioiden piirtämiseen käytettäviä sivustoja (yUML, 
+* Erilaisia kaavioiden piirtämiseen käytettäviä sivustoja (esim. yUML, draw.io)
