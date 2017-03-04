@@ -45,7 +45,7 @@ Spämmi-teemamme mukaisesti keskustelupalstallemme voi lisätä lyhyitä ja napa
 
 * * *
 
-####Hyödynnettyjä sovelluksia###
+####Hyödynnettyjä työkaluja###
 
 Ryhmämme jäsenet tutustuivat ryhmätyön ja kurssin aikana muun muassa seuraviin työkaluihin:
 * SQL
@@ -54,6 +54,4 @@ Ryhmämme jäsenet tutustuivat ryhmätyön ja kurssin aikana muun muassa seuravi
 * Spark
 * Thymeleaf
 * Heroku
-* SourceTree
-* DB Browser for Sqlite
-* Erilaisia kaavioiden piirtämiseen käytettäviä sivustoja (esim. yUML, draw.io)
+* Erilaisia kaavioiden piirtämiseen käytettäviä sivustoja, ja muita apusovelluksia (esim. yUML, draw.io, SourceTree, DB Browser for Sqlite)
