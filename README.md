@@ -1,6 +1,6 @@
 # Spämmifoorumi
 
-##Tietokantojen perusteet -kurssin ryhmätyö (kevät 2017, periodi 3)##
+## Tietokantojen perusteet -kurssin ryhmätyö (kevät 2017, periodi 3)##
 
 * Ryhmä Spämmi:
   * [BikkuMyy](https://github.com/BikkuMyy)
