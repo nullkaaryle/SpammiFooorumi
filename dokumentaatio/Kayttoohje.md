@@ -1,6 +1,6 @@
-##SpämmiFoorumin käyttöohjeet##
+## SpämmiFoorumin käyttöohjeet ##
 
-###Alueiden selailu ja lisääminen###
+### Alueiden selailu ja lisääminen ###
 
 * Spämmifoorumin etusivulla näkyy keskustelualueet sekä niiden tiedot – alueen kaikkien viestien määrät sekä viimeisimmän viestin lähetysaika listattuna aakkosjärjestyksessä. 
 * Sivun alaosassa on tekstikenttä ja ”Lisää”-painike uuden alueen lisäämistä varten. 
@@ -11,7 +11,7 @@
 
 * * *
 
-###Viestiketjujen selailu ja lisääminen###
+### Viestiketjujen selailu ja lisääminen ###
 * Aluekohtaisella sivulla näytetään uusimmat 10 viestiketjua järjestettynä viimeisimpien niihin lähetettyjen viestien mukaan. 
 * Jos alueella on enemmän kuin 10 viestiketjua, niitä voi selailla ”Seuraava”- ja ”Edellinen”-painikkeiden avulla.  
 * Sivun alaosassa on tekstikenttä ja ”Lisää”-painike uuden viestiketjun lisäämistä varten. 
@@ -23,7 +23,7 @@
 
 * * *
 
-###Viestien selailu ja lisääminen###
+### Viestien selailu ja lisääminen ###
 * Viestiketjukohtaisella sivulla näytetään ensimmäiset 10 viestiä vanhin viesti ylimpänä. 
 * Jos viestiketjussa on enemmän kuin 10 viestiä, niitä voi selailla ”Seuraava”- ja ”Edellinen”-painikkeiden avulla. 
 * Sivun alaosassa on tekstikentät nimimerkille ja viestin sisällölle sekä ”Lisää”-painike uuden viestin lisäämistä varten. 
