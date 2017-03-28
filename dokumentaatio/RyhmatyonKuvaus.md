@@ -5,7 +5,7 @@
 
 * * *
 
-###Ryhmä Spämmi:###
+### Ryhmä Spämmi: ###
 
 * [BikkuMyy](https://github.com/BikkuMyy)
 * [Geffe](https://github.com/Geffe)
@@ -14,7 +14,7 @@
 
 * * *
 
-###Käsitekaavio###
+### Käsitekaavio ###
 
 Aloitimme ryhmätyömme pohtimalla keskustelupalstoille olennaisia käsitteitä.
 
@@ -22,7 +22,7 @@ Aloitimme ryhmätyömme pohtimalla keskustelupalstoille olennaisia käsitteitä.
 
 * * * 
 
-###Tietokantakaavio###
+### Tietokantakaavio ###
 
 Muodostimme käsitteistä suunnitelman foorumimme tietokantaa varten.
 
@@ -30,7 +30,7 @@ Muodostimme käsitteistä suunnitelman foorumimme tietokantaa varten.
 
 * * *
 
-###Skeema###
+### Skeema ###
 
 Spämmi-teemamme mukaisesti keskustelupalstallemme voi lisätä lyhyitä ja napakoita viestejä, joiden lähettäminen onnistuu myös anonyyminä.
 
@@ -39,13 +39,13 @@ Spämmi-teemamme mukaisesti keskustelupalstallemme voi lisätä lyhyitä ja napa
 * * *
 
 
-###SpämmiFoorumin web-sovellus###
+### SpämmiFoorumin web-sovellus ###
 * [Linkki käyttöohjeeseen](https://github.com/nullkaaryle/SpammiFooorumi/blob/master/dokumentaatio/Kayttoohje.md)
 * [Linkki SpämmiFoorumiin](http://intense-dusk-21512.herokuapp.com/) (Herokussa)
 
 * * *
 
-####Hyödynnettyjä työkaluja###
+#### Hyödynnettyjä työkaluja ###
 
 Ryhmämme jäsenet tutustuivat ryhmätyön ja kurssin aikana muun muassa seuraviin työkaluihin:
 * SQL
